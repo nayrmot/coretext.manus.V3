@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Cases - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent.html">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories.html">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse show list-unstyled" id="casesSubmenu">
+            <li class="active">
+              <a href="/cases.html">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new.html">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry.html">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits.html">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages.html">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages.html">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring.html">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser.html">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings.html">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          
+          <!-- Global Case Selector -->
+          <div class="case-selector-container ms-3">
+            <select id="globalCaseSelector" class="form-select form-select-sm">
+              <option value="all">All Cases</option>
+              <option value="1">Smith v. Johnson</option>
+              <option value="2">Williams v. City Hospital</option>
+              <option value="3">Brown v. Insurance Co.</option>
+            </select>
+          </div>
+
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout.html">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2 data-base-title="Cases">Cases</h2>
+            <p class="text-muted">Manage your legal cases and associated documents.</p>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-12 text-end">
+            <a href="/cases/new.html" class="btn btn-primary">
+              <i class="bi bi-plus-circle"></i> New Case
+            </a>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Filters</h5>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="statusFilter" class="form-label">Status</label>
+                <select class="form-select" id="statusFilter">
+                  <option value="">All Statuses</option>
+                  <option value="active">Active</option>
+                  <option value="closed">Closed</option>
+                  <option value="pending">Pending</option>
+                </select>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="typeFilter" class="form-label">Case Type</label>
+                <select class="form-select" id="typeFilter">
+                  <option value="">All Types</option>
+                  <option value="personal_injury">Personal Injury</option>
+                  <option value="medical_malpractice">Medical Malpractice</option>
+                  <option value="contract">Contract</option>
+                  <option value="employment">Employment</option>
+                </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="searchInput" class="form-label">Search</label>
+                <input type="text" class="form-control" id="searchInput" placeholder="Search cases...">
+              </div>
+              <div class="col-md-2 mb-3 d-flex align-items-end">
+                <button id="applyFilters" class="btn btn-primary w-100">Apply Filters</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover" id="casesList">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 40px;">
+                      <input type="checkbox" class="form-check-input" id="selectAll">
+                    </th>
+                    <th scope="col">Case Name</th>
+                    <th scope="col">Case Number</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Documents</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="case-row" data-status="active" data-type="personal_injury">
+                    <td>
+                      <input type="checkbox" class="form-check-input case-select" name="caseIds[]" value="1">
+                    </td>
+                    <td>
+                      <a href="/cases/detail.html?id=1" class="fw-bold">Smith v. Johnson</a>
+                    </td>
+                    <td>2025-CV-1234</td>
+                    <td><span class="badge bg-info">Personal Injury</span></td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>42</td>
+                    <td>Apr 5, 2025</td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Actions
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="/cases/detail.html?id=1"><i class="bi bi-eye"></i> View</a></li>
+                          <li><a class="dropdown-item" href="/cases/edit.html?id=1"><i class="bi bi-pencil"></i> Edit</a></li>
+                          <li><a class="dropdown-item" href="/documents.html?case=1"><i class="bi bi-file-earmark-text"></i> Documents</a></li>
+                          <li><a class="dropdown-item" href="/exhibits.html?case=1"><i class="bi bi-card-list"></i> Exhibits</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Delete</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="case-row" data-status="active" data-type="medical_malpractice">
+                    <td>
+                      <input type="checkbox" class="form-check-input case-select" name="caseIds[]" value="2">
+                    </td>
+                    <td>
+                      <a href="/cases/detail.html?id=2" class="fw-bold">Williams v. City Hospital</a>
+                    </td>
+                    <td>2025-CV-2468</td>
+                    <td><span class="badge bg-danger">Medical Malpractice</span></td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>37</td>
+                    <td>Mar 15, 2025</td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                          Actions
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                          <li><a class="dropdown-item" href="/cases/detail.html?id=2"><i class="bi bi-eye"></i> View</a></li>
+                          <li><a class="dropdown-item" href="/cases/edit.html?id=2"><i class="bi bi-pencil"></i> Edit</a></li>
+                          <li><a class="dropdown-item" href="/documents.html?case=2"><i class="bi bi-file-earmark-text"></i> Documents</a></li>
+                          <li><a class="dropdown-item" href="/exhibits.html?case=2"><i class="bi bi-card-list"></i> Exhibits</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Delete</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="case-row" data-status="active" data-type="contract">
+                    <td>
+                      <input type="checkbox" class="form-check-input case-select" name="caseIds[]" value="3">
+                    </td>
+                    <td>
+                      <a href="/cases/detail.html?id=3" class="fw-bold">Brown v. Insurance Co.</a>
+                    </td>
+                    <td>2025-CV-3579</td>
+                    <td><span class="badge bg-primary">Contract</span></td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>29</td>
+                    <td>Feb 28, 2025</td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                          Actions
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                          <li><a class="dropdown-item" href="/cases/detail.html?id=3"><i class="bi bi-eye"></i> View</a></li>
+                          <li><a class="dropdown-item" href="/cases/edit.html?id=3"><i class="bi bi-pencil"></i> Edit</a></li>
+                          <li><a class="dropdown-item" href="/documents.html?case=3"><i class="bi bi-file-earmark-text"></i> Documents</a></li>
+                          <li><a class="dropdown-item" href="/exhibits.html?case=3"><i class="bi bi-card-list"></i> Exhibits</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Delete</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="case-row" data-status="closed" data-type="personal_injury">
+                    <td>
+                      <input type="checkbox" class="form-check-input case-select" name="caseIds[]" value="4">
+                    </td>
+                    <td>
+                      <a href="/cases/detail.html?id=4" class="fw-bold">Davis v. Construction Corp.</a>
+                    </td>
+                    <td>2024-CV-9876</td>
+                    <td><span class="badge bg-info">Personal Injury</span></td>
+                    <td><span class="badge bg-secondary">Closed</span></td>
+                    <td>56</td>
+                    <td>Dec 10, 2024</td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                          Actions
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
+                          <li><a class="dropdown-item" href="/cases/detail.html?id=4"><i class="bi bi-eye"></i> View</a></li>
+                          <li><a class="dropdown-item" href="/cases/edit.html?id=4"><i class="bi bi-pencil"></i> Edit</a></li>
+                          <li><a class="dropdown-item" href="/documents.html?case=4"><i class="bi bi-file-earmark-text"></i> Documents</a></li>
+                          <li><a class="dropdown-item" href="/exhibits.html?case=4"><i class="bi bi-card-list"></i> Exhibits</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Delete</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="case-row" data-status="pending" data-type="employment">
+                    <td>
+                      <input type="checkbox" class="form-check-input case-select" name="caseIds[]" value="5">
+                    </td>
+                    <td>
+                      <a href="/cases/detail.html?id=5" class="fw-bold">Martinez v. Tech Industries</a>
+                    </td>
+                    <td>2025-CV-5432</td>
+                    <td><span class="badge bg-warning">Employment</span></td>
+                    <td><span class="badge bg-info">Pending</span></td>
+                    <td>12</td>
+                    <td>Apr 1, 2025</td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
+                          Actions
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
+                          <li><a class="dropdown-item" href="/cases/detail.html?id=5"><i class="bi bi-eye"></i> View</a></li>
+                          <li><a class="dropdown-item" href="/cases/edit.html?id=5"><i class="bi bi-pencil"></i> Edit</a></li>
+                          <li><a class="dropdown-item" href="/documents.html?case=5"><i class="bi bi-file-earmark-text"></i> Documents</a></li>
+                          <li><a class="dropdown-item" href="/exhibits.html?case=5"><i class="bi bi-card-list"></i> Exhibits</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Delete</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <div class="dropdown">
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="bulkActionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Bulk Actions
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="bulkActionsDropdown">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle"></i> Mark as Active</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle"></i> Mark as Closed</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-clock"></i> Mark as Pending</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-zip"></i> Export Case Files</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Delete Selected</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <nav aria-label="Cases pagination">
+                  <ul class="pagination justify-content-end">
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Select all checkbox
+      $('#selectAll').change(function() {
+        $('.case-select').prop('checked', $(this).prop('checked'));
+      });
+      
+      // Apply filters button
+      $('#applyFilters').click(function() {
+        filterCases();
+      });
+      
+      // Initialize with global case selection if available
+      const savedCase = localStorage.getItem('selectedCase');
+      if (savedCase && savedCase !== 'all') {
+        // Highlight the selected case
+        $('.case-row').each(function() {
+          if ($(this).find('input.case-select').val() === savedCase) {
+            $(this).addClass('table-primary');
+          }
+        });
+      }
+    });
+    
+    function filterCases() {
+      const status = $('#statusFilter').val();
+      const type = $('#typeFilter').val();
+      const searchTerm = $('#searchInput').val().toLowerCase();
+      
+      // Show loading state
+      showSpinner('Filtering cases...');
+      
+      setTimeout(() => {
+        hideSpinner();
+        
+        // Filter case rows
+        $('.case-row').each(function() {
+          const rowStatus = $(this).data('status');
+          const rowType = $(this).data('type');
+          const rowName = $(this).find('a.fw-bold').text().toLowerCase();
+          
+          let showRow = true;
+          
+          if (status && rowStatus !== status) {
+            showRow = false;
+          }
+          
+          if (type && rowType !== type) {
+            showRow = false;
+          }
+          
+          if (searchTerm && !rowName.includes(searchTerm)) {
+            showRow = false;
+          }
+          
+          $(this).toggle(showRow);
+        });
+      }, 300);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Integration - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse show list-unstyled" id="emailSubmenu">
+            <li class="active">
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2>Gmail Integration</h2>
+            <p class="text-muted">Connect your Gmail account to automatically import and process email attachments.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Gmail Connection</h5>
+              </div>
+              <div class="card-body">
+                <div id="gmailConnectionStatus">
+                  <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle-fill"></i> Not connected to Gmail
+                    <div class="mt-2">
+                      <small>Connect your Gmail account to enable email integration features.</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <button id="gmailConnectButton" class="btn btn-primary me-2">
+                    <i class="bi bi-google"></i> Connect Gmail
+                  </button>
+                  <button id="gmailDisconnectButton" class="btn btn-outline-danger" style="display: none;">
+                    <i class="bi bi-x-circle"></i> Disconnect
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Email Monitoring Settings</h5>
+              </div>
+              <div class="card-body">
+                <form id="emailMonitoringForm">
+                  <div class="mb-3">
+                    <label for="monitoringCase" class="form-label">Case</label>
+                    <select class="form-select" id="monitoringCase" name="caseId" required>
+                      <option value="" selected disabled>Select a case</option>
+                      <option value="1">Smith v. Johnson</option>
+                      <option value="2">Williams v. City Hospital</option>
+                      <option value="3">Brown v. Insurance Co.</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="monitoringLabels" class="form-label">Gmail Labels to Monitor</label>
+                    <select class="form-select" id="monitoringLabels" name="labelIds[]" multiple required>
+                      <option value="INBOX" selected>Inbox</option>
+                      <option value="IMPORTANT">Important</option>
+                      <option value="CATEGORY_PERSONAL">Personal</option>
+                      <option value="CATEGORY_UPDATES">Updates</option>
+                      <option value="Label_1">Case Documents</option>
+                      <option value="Label_2">Legal Correspondence</option>
+                    </select>
+                    <div class="form-text">Select one or more Gmail labels to monitor for documents.</div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="monitoringCategory" class="form-label">Default Document Category</label>
+                    <select class="form-select" id="monitoringCategory" name="category">
+                      <option value="Email" selected>Email</option>
+                      <option value="Correspondence">Correspondence</option>
+                      <option value="Pleadings">Pleadings</option>
+                      <option value="Discovery">Discovery</option>
+                      <option value="Uncategorized">Uncategorized</option>
+                    </select>
+                    <div class="form-text">Default category for documents imported from email.</div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="monitoringFrequency" class="form-label">Monitoring Frequency</label>
+                    <select class="form-select" id="monitoringFrequency" name="frequency">
+                      <option value="hourly" selected>Hourly</option>
+                      <option value="daily">Daily</option>
+                      <option value="weekly">Weekly</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="monitoringAttachmentsOnly" name="attachmentsOnly" value="true" checked>
+                      <label class="form-check-label" for="monitoringAttachmentsOnly">
+                        Process attachments only
+                      </label>
+                      <div class="form-text">When checked, only email attachments will be processed. Otherwise, emails will also be saved as documents.</div>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="monitoringApplyBates" name="applyBates" value="true">
+                      <label class="form-check-label" for="monitoringApplyBates">
+                        Automatically apply Bates labels
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div id="monitoringBatesOptions" class="mb-3 ps-4 border-start" style="display: none;">
+                    <label for="monitoringBatesConfig" class="form-label">Bates Configuration</label>
+                    <select class="form-select" id="monitoringBatesConfig" name="batesConfigId">
+                      <option value="1">SMITH - Smith v. Johnson</option>
+                      <option value="2">WILL - Williams v. City Hospital</option>
+                      <option value="3">BROWN - Brown v. Insurance Co.</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="monitoringNotify" name="notify" value="true" checked>
+                      <label class="form-check-label" for="monitoringNotify">
+                        Send notification when documents are processed
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary" id="saveMonitoringButton" disabled>Save Settings</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Email Integration Status</h5>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-warning">
+                  <i class="bi bi-exclamation-triangle-fill"></i> Gmail not connected
+                </div>
+                <div class="d-grid gap-2">
+                  <button class="btn btn-outline-primary" id="checkStatusButton" disabled>
+                    <i class="bi bi-arrow-repeat"></i> Check Status
+                  </button>
+                  <button class="btn btn-outline-primary" id="manualProcessButton" disabled>
+                    <i class="bi bi-envelope-check"></i> Process Emails Now
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Email Integration Help</h5>
+              </div>
+              <div class="card-body">
+                <h6>About Gmail Integration</h6>
+                <p>The Document Management System can monitor your Gmail account for new emails and automatically process attachments as documents.</p>
+                
+                <h6>Features</h6>
+                <ul>
+                  <li>Automatically import email attachments as documents</li>
+                  <li>Monitor specific Gmail labels</li>
+                  <li>Apply Bates labels to imported documents</li>
+                  <li>Categorize documents based on email content</li>
+                  <li>Receive notifications when new documents are processed</li>
+                </ul>
+                
+                <h6>Privacy & Security</h6>
+                <p>The system only accesses emails in the labels you specify. Your Gmail credentials are securely stored and can be revoked at any time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Toggle Bates options
+      $('#monitoringApplyBates').change(function() {
+        if ($(this).is(':checked')) {
+          $('#monitoringBatesOptions').slideDown();
+        } else {
+          $('#monitoringBatesOptions').slideUp();
+        }
+      });
+      
+      // Handle Gmail connect button click
+      $('#gmailConnectButton').click(function() {
+        // In a real app, this would redirect to Google OAuth
+        // Simulate successful connection
+        setTimeout(() => {
+          $('#gmailConnectionStatus').html(`
+            <div class="alert alert-success">
+              <i class="bi bi-check-circle-fill"></i> Connected to Gmail
+              <div class="mt-2">
+                <small>Connected as: john.doe@example.com</small>
+              </div>
+            </div>
+          `);
+          
+          // Show disconnect button, hide connect button
+          $('#gmailConnectButton').hide();
+          $('#gmailDisconnectButton').show();
+          
+          // Enable form buttons
+          $('#saveMonitoringButton').prop('disabled', false);
+          $('#checkStatusButton').prop('disabled', false);
+          $('#manualProcessButton').prop('disabled', false);
+          
+          showAlert('Successfully connected to Gmail!', 'success');
+        }, 1000);
+      });
+      
+      // Handle Gmail disconnect button click
+      $('#gmailDisconnectButton').click(function() {
+        if (confirm('Are you sure you want to disconnect from Gmail?')) {
+          // Simulate disconnection
+          $('#gmailConnectionStatus').html(`
+            <div class="alert alert-warning">
+              <i class="bi bi-exclamation-triangle-fill"></i> Not connected to Gmail
+              <div class="mt-2">
+                <small>Connect your Gmail account to enable email integration features.</small>
+              </div>
+            </div>
+          `);
+          
+          // Show connect button, hide disconnect button
+          $('#gmailConnectButton').show();
+          $('#gmailDisconnectButton').hide();
+          
+          // Disable form buttons
+          $('#saveMonitoringButton').prop('disabled', true);
+          $('#checkStatusButton').prop('disabled', true);
+          $('#manualProcessButton').prop('disabled', true);
+          
+          showAlert('Disconnected from Gmail', 'warning');
+        }
+      });
+      
+      // Handle check status button click
+      $('#checkStatusButton').click(function() {
+        showSpinner('Checking email integration status...');
+        
+        // Simulate status check
+        setTimeout(() => {
+          hideSpinner();
+          showAlert('Email integration is working properly. Last check: ' + new Date().toLocaleString(), 'success');
+        }, 1500);
+      });
+      
+      // Handle manual process button click
+      $('#manualProcessButton').click(function() {
+        showSpinner('Processing emails...');
+        
+        // Simulate email processing
+        setTimeout(() => {
+          hideSpinner();
+          showAlert('Email processing complete. 3 new documents imported.', 'success');
+        }, 2000);
+      });
+      
+      // Handle monitoring form submission
+      $('#emailMonitoringForm').submit(function(e) {
+        e.preventDefault();
+        
+        // Validate case selection
+        if (!$('#monitoringCase').val()) {
+          showAlert('Please select a case', 'danger');
+          return;
+        }
+        
+        // Validate label selection
+        if ($('#monitoringLabels').val().length === 0) {
+          showAlert('Please select at least one Gmail label to monitor', 'danger');
+          return;
+        }
+        
+        // Simulate saving settings
+        showSpinner('Saving email monitoring settings...');
+        
+        setTimeout(() => {
+          hideSpinner();
+          showAlert('Email monitoring settings saved successfully!', 'success');
+        }, 1000);
+      });
+    });
+  </script>
+</body>
+</html>

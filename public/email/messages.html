@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Messages - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent.html">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories.html">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases.html">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new.html">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry.html">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits.html">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages.html">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse show list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li class="active">
+              <a href="/email/messages.html">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring.html">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser.html">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings.html">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          
+          <!-- Global Case Selector -->
+          <div class="case-selector-container ms-3">
+            <select id="globalCaseSelector" class="form-select form-select-sm">
+              <option value="all">All Cases</option>
+              <option value="1">Smith v. Johnson</option>
+              <option value="2">Williams v. City Hospital</option>
+              <option value="3">Brown v. Insurance Co.</option>
+            </select>
+          </div>
+
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout.html">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2 data-base-title="Email Messages">Email Messages</h2>
+            <p class="text-muted">View and manage emails processed from your connected Gmail account.</p>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Email Messages</h5>
+                <div>
+                  <button type="button" class="btn btn-outline-primary btn-sm me-2" id="refreshButton">
+                    <i class="bi bi-arrow-repeat"></i> Refresh
+                  </button>
+                  <button type="button" class="btn btn-primary btn-sm" id="processSelectedButton">
+                    <i class="bi bi-gear"></i> Process Selected
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Search emails..." id="searchEmails">
+                      <button class="btn btn-outline-secondary" type="button" id="searchEmailsButton">
+                        <i class="bi bi-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="d-flex justify-content-end">
+                      <select class="form-select form-select-sm me-2" id="filterStatus">
+                        <option value="all">All Status</option>
+                        <option value="processed">Processed</option>
+                        <option value="unprocessed">Unprocessed</option>
+                        <option value="error">Error</option>
+                      </select>
+                      <select class="form-select form-select-sm" id="filterDate">
+                        <option value="all">All Dates</option>
+                        <option value="today">Today</option>
+                        <option value="yesterday">Yesterday</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col" width="30">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="selectAllEmails">
+                          </div>
+                        </th>
+                        <th scope="col" width="30"></th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">From</th>
+                        <th scope="col">Case</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Attachments</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-case-id="1">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star-fill text-warning"></i></td>
+                        <td>RE: Settlement Offer</td>
+                        <td>opposing.counsel@lawfirm.com</td>
+                        <td>Smith v. Johnson</td>
+                        <td>Apr 20, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">2 files</span>
+                        </td>
+                        <td><span class="badge bg-success">Processed</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-case-id="2">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star text-muted"></i></td>
+                        <td>Medical Records Request</td>
+                        <td>records@cityhospital.org</td>
+                        <td>Williams v. City Hospital</td>
+                        <td>Apr 20, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">1 file</span>
+                        </td>
+                        <td><span class="badge bg-success">Processed</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-case-id="3">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star text-muted"></i></td>
+                        <td>Policy Coverage Update</td>
+                        <td>claims@insurance.com</td>
+                        <td>Brown v. Insurance Co.</td>
+                        <td>Apr 19, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">0 files</span>
+                        </td>
+                        <td><span class="badge bg-warning">Unprocessed</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-case-id="1">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star-fill text-warning"></i></td>
+                        <td>Notice of Hearing</td>
+                        <td>court@county.gov</td>
+                        <td>Smith v. Johnson</td>
+                        <td>Apr 19, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">1 file</span>
+                        </td>
+                        <td><span class="badge bg-success">Processed</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-case-id="2">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star text-muted"></i></td>
+                        <td>Expert Witness Availability</td>
+                        <td>expert@medical.edu</td>
+                        <td>Williams v. City Hospital</td>
+                        <td>Apr 18, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">0 files</span>
+                        </td>
+                        <td><span class="badge bg-warning">Unprocessed</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-case-id="1">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star text-muted"></i></td>
+                        <td>Deposition Transcript</td>
+                        <td>transcripts@reporting.com</td>
+                        <td>Smith v. Johnson</td>
+                        <td>Apr 17, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">1 file</span>
+                        </td>
+                        <td><span class="badge bg-success">Processed</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-case-id="3">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star text-muted"></i></td>
+                        <td>Claim Denial Letter</td>
+                        <td>claims@insurance.com</td>
+                        <td>Brown v. Insurance Co.</td>
+                        <td>Apr 16, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">1 file</span>
+                        </td>
+                        <td><span class="badge bg-danger">Error</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-case-id="2">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star-fill text-warning"></i></td>
+                        <td>Settlement Proposal</td>
+                        <td>defense@lawfirm.com</td>
+                        <td>Williams v. City Hospital</td>
+                        <td>Apr 15, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">2 files</span>
+                        </td>
+                        <td><span class="badge bg-success">Processed</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-case-id="1">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star text-muted"></i></td>
+                        <td>Discovery Responses</td>
+                        <td>opposing.counsel@lawfirm.com</td>
+                        <td>Smith v. Johnson</td>
+                        <td>Apr 14, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">3 files</span>
+                        </td>
+                        <td><span class="badge bg-success">Processed</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-case-id="3">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input email-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td><i class="bi bi-star text-muted"></i></td>
+                        <td>Policy Interpretation</td>
+                        <td>legal@insurance.com</td>
+                        <td>Brown v. Insurance Co.</td>
+                        <td>Apr 13, 2025</td>
+                        <td>
+                          <span class="badge bg-secondary">1 file</span>
+                        </td>
+                        <td><span class="badge bg-success">Processed</span></td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View" data-bs-toggle="modal" data-bs-target="#viewEmailModal">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Process">
+                              <i class="bi bi-gear"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <div>
+                    <span class="text-muted">Showing 10 of 42 emails</span>
+                  </div>
+                  <nav aria-label="Email pagination">
+                    <ul class="pagination pagination-sm mb-0">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                      </li>
+                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">4</a></li>
+                      <li class="page-item"><a class="page-link" href="#">5</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Email Modal -->
+  <div class="modal fade" id="viewEmailModal" tabindex="-1" aria-labelledby="viewEmailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewEmailModalLabel">RE: Settlement Offer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <div class="d-flex justify-content-between">
+              <div>
+                <strong>From:</strong> opposing.counsel@lawfirm.com<br>
+                <strong>To:</strong> john.doe@yourfirm.com<br>
+                <strong>Date:</strong> Apr 20, 2025, 9:45 AM<br>
+                <strong>Case:</strong> Smith v. Johnson
+              </div>
+              <div>
+                <span class="badge bg-success">Processed</span>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="mb-3">
+            <div class="email-body">
+              <p>Dear Counsel,</p>
+              <p>Thank you for your settlement offer dated April 15, 2025. After reviewing the proposal with my client, we would like to counter with the following terms:</p>
+              <ol>
+                <li>Settlement amount of $175,000, payable within 30 days of execution of the settlement agreement.</li>
+                <li>Mutual release of all claims.</li>
+                <li>Confidentiality provision as outlined in your proposal.</li>
+                <li>No admission of liability.</li>
+              </ol>
+              <p>Please find attached a draft settlement agreement reflecting these terms, as well as a calculation of damages supporting our counter-offer.</p>
+              <p>We look forward to your response.</p>
+              <p>Regards,<br>
+              Jane Smith<br>
+              Attorney at Law<br>
+              Smith & Associates</p>
+            </div>
+          </div>
+          <hr>
+          <div class="mb-3">
+            <h6>Attachments</h6>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+                  Draft_Settlement_Agreement.pdf
+                </div>
+                <div>
+                  <span class="badge bg-success">Processed</span>
+                  <button class="btn btn-sm btn-outline-primary ms-2">
+                    <i class="bi bi-download"></i>
+                  </button>
+                </div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-file-earmark-excel text-success me-2"></i>
+                  Damages_Calculation.xlsx
+                </div>
+                <div>
+                  <span class="badge bg-success">Processed</span>
+                  <button class="btn btn-sm btn-outline-primary ms-2">
+                    <i class="bi bi-download"></i>
+                  </button>
+                </div>
+              </a>
+            </div>
+          </div>
+          <hr>
+          <div class="mb-3">
+            <h6>Processing History</h6>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Date/Time</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                    <th>User</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Apr 20, 2025, 10:15 AM</td>
+                    <td>Email Received</td>
+                    <td><span class="badge bg-success">Success</span></td>
+                    <td>System</td>
+                  </tr>
+                  <tr>
+                    <td>Apr 20, 2025, 10:15 AM</td>
+                    <td>Attachments Extracted</td>
+                    <td><span class="badge bg-success">Success</span></td>
+                    <td>System</td>
+                  </tr>
+                  <tr>
+                    <td>Apr 20, 2025, 10:16 AM</td>
+                    <td>Documents Processed</td>
+                    <td><span class="badge bg-success">Success</span></td>
+                    <td>System</td>
+                  </tr>
+                  <tr>
+                    <td>Apr 20, 2025, 10:16 AM</td>
+                    <td>Notification Sent</td>
+                    <td><span class="badge bg-success">Success</span></td>
+                    <td>System</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline-primary">
+            <i class="bi bi-reply"></i> Reply
+          </button>
+          <button type="button" class="btn btn-outline-primary">
+            <i class="bi bi-forward"></i> Forward
+          </button>
+          <button type="button" class="btn btn-primary">
+            <i class="bi bi-gear"></i> Process
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Initialize tooltips
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      });
+      
+      // Select all emails
+      $('#selectAllEmails').change(function() {
+        $('.email-select').prop('checked', $(this).is(':checked'));
+        updateSelectedCount();
+      });
+      
+      // Individual email selection
+      $('.email-select').change(function() {
+        updateSelectedCount();
+        
+        // If any checkbox is unchecked, uncheck "select all" as well
+        if (!$(this).is(':checked')) {
+          $('#selectAllEmails').prop('checked', false);
+        }
+        
+        // If all checkboxes are checked, check "select all" as well
+        if ($('.email-select:checked').length === $('.email-select').length) {
+          $('#selectAllEmails').prop('checked', true);
+        }
+      });
+      
+      // Process selected button
+      $('#processSelectedButton').click(function() {
+        const selectedCount = $('.email-select:checked').length;
+        
+        if (selectedCount === 0) {
+          showAlert('Please select at least one email to process.', 'warning');
+          return;
+        }
+        
+        showAlert(`Processing ${selectedCount} selected email(s)...`, 'info');
+        
+        // Simulate processing
+        setTimeout(() => {
+          showAlert(`Successfully processed ${selectedCount} email(s).`, 'success');
+          
+          // Update status of processed emails
+          $('.email-select:checked').each(function() {
+            const row = $(this).closest('tr');
+            row.find('td:eq(7)').html('<span class="badge bg-success">Processed</span>');
+          });
+          
+          // Uncheck all checkboxes
+          $('.email-select, #selectAllEmails').prop('checked', false);
+          updateSelectedCount();
+        }, 1500);
+      });
+      
+      // Refresh button
+      $('#refreshButton').click(function() {
+        showAlert('Refreshing email list...', 'info');
+        
+        // Simulate refresh
+        setTimeout(() => {
+          showAlert('Email list refreshed successfully.', 'success');
+        }, 1000);
+      });
+      
+      // Star/unstar emails
+      $('td .bi-star, td .bi-star-fill').click(function() {
+        const icon = $(this);
+        
+        if (icon.hasClass('bi-star')) {
+          icon.removeClass('bi-star text-muted').addClass('bi-star-fill text-warning');
+          showAlert('Email marked as important.', 'success');
+        } else {
+          icon.removeClass('bi-star-fill text-warning').addClass('bi-star text-muted');
+          showAlert('Email unmarked as important.', 'success');
+        }
+      });
+      
+      // Search emails
+      $('#searchEmailsButton').click(function() {
+        const searchTerm = $('#searchEmails').val().toLowerCase();
+        if (searchTerm.length > 0) {
+          $('tbody tr').hide();
+          $('tbody tr').each(function() {
+            const text = $(this).text().toLowerCase();
+            if (text.indexOf(searchTerm) > -1) {
+              $(this).show();
+            }
+          });
+          
+          const visibleRows = $('tbody tr:visible').length;
+          showAlert(`Found ${visibleRows} email(s) matching "${searchTerm}".`, 'info');
+        } else {
+          $('tbody tr').show();
+          applyFilters();
+        }
+      });
+      
+      // Enter key in search box
+      $('#searchEmails').keypress(function(e) {
+        if (e.which === 13) {
+          $('#searchEmailsButton').click();
+          return false;
+        }
+      });
+      
+      // Filter by status
+      $('#filterStatus').change(function() {
+        applyFilters();
+      });
+      
+      // Filter by date
+      $('#filterDate').change(function() {
+        applyFilters();
+      });
+      
+      // Global case selector
+      $('#globalCaseSelector').change(function() {
+        const selectedCase = $(this).val();
+        
+        if (selectedCase === 'all') {
+          $('tbody tr').show();
+          applyFilters();
+          showAlert('Showing emails for all cases.', 'info');
+        } else {
+          $('tbody tr').hide();
+          $(`tbody tr[data-case-id="${selectedCase}"]`).show();
+          
+          // Apply additional filters to the visible rows
+          applyFilters(true);
+          
+          const visibleRows = $('tbody tr:visible').length;
+          const caseName = $('#globalCaseSelector option:selected').text();
+          showAlert(`Showing ${visibleRows} email(s) for ${caseName}.`, 'info');
+        }
+      });
+      
+      // Function to apply filters
+      function applyFilters(skipCaseFilter = false) {
+        const statusFilter = $('#filterStatus').val();
+        const dateFilter = $('#filterDate').val();
+        
+        // If not skipping case filter, apply it first
+        if (!skipCaseFilter) {
+          const selectedCase = $('#globalCaseSelector').val();
+          if (selectedCase !== 'all') {
+            $('tbody tr').hide();
+            $(`tbody tr[data-case-id="${selectedCase}"]`).show();
+          } else {
+            $('tbody tr').show();
+          }
+        }
+        
+        // Apply status filter to visible rows
+        if (statusFilter !== 'all') {
+          $('tbody tr:visible').each(function() {
+            const statusText = $(this).find('td:eq(7) .badge').text().toLowerCase();
+            if (statusFilter === 'processed' && statusText !== 'processed') {
+              $(this).hide();
+            } else if (statusFilter === 'unprocessed' && statusText !== 'unprocessed') {
+              $(this).hide();
+            } else if (statusFilter === 'error' && statusText !== 'error') {
+              $(this).hide();
+            }
+          });
+        }
+        
+        // Apply date filter to visible rows
+        if (dateFilter !== 'all') {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          
+          const yesterday = new Date(today);
+          yesterday.setDate(yesterday.getDate() - 1);
+          
+          const thisWeekStart = new Date(today);
+          thisWeekStart.setDate(thisWeekStart.getDate() - thisWeekStart.getDay());
+          
+          const thisMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+          
+          $('tbody tr:visible').each(function() {
+            const dateText = $(this).find('td:eq(5)').text();
+            const emailDate = new Date(dateText);
+            emailDate.setHours(0, 0, 0, 0);
+            
+            if (dateFilter === 'today' && emailDate.getTime() !== today.getTime()) {
+              $(this).hide();
+            } else if (dateFilter === 'yesterday' && emailDate.getTime() !== yesterday.getTime()) {
+              $(this).hide();
+            } else if (dateFilter === 'week' && emailDate < thisWeekStart) {
+              $(this).hide();
+            } else if (dateFilter === 'month' && emailDate < thisMonthStart) {
+              $(this).hide();
+            }
+          });
+        }
+        
+        updateSelectedCount();
+      }
+      
+      // Function to update selected count
+      function updateSelectedCount() {
+        const selectedCount = $('.email-select:checked').length;
+        const totalVisible = $('.email-select:visible').length;
+        
+        if (selectedCount > 0) {
+          $('#processSelectedButton').text(`Process Selected (${selectedCount})`);
+          $('#processSelectedButton').prop('disabled', false);
+        } else {
+          $('#processSelectedButton').text('Process Selected');
+          $('#processSelectedButton').prop('disabled', false);
+        }
+        
+        // Update "select all" checkbox
+        if (selectedCount === totalVisible && totalVisible > 0) {
+          $('#selectAllEmails').prop('checked', true);
+        } else {
+          $('#selectAllEmails').prop('checked', false);
+        }
+      }
+    });
+    
+    function showAlert(message, type) {
+      const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      
+      $('#alertContainer').html(alertHtml);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        $('.alert').alert('close');
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

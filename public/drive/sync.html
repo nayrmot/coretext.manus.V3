@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Drive Integration - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse show list-unstyled" id="driveSubmenu">
+            <li class="active">
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2>Google Drive Synchronization</h2>
+            <p class="text-muted">Synchronize documents between the Document Management System and Google Drive.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Google Drive Connection</h5>
+              </div>
+              <div class="card-body">
+                <div id="driveConnectionStatus">
+                  <div class="alert alert-success">
+                    <i class="bi bi-check-circle-fill"></i> Connected to Google Drive
+                    <div class="mt-2">
+                      <small>Connected as: john.doe@example.com</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <button id="connectDriveButton" class="btn btn-primary me-2" style="display: none;">
+                    <i class="bi bi-google"></i> Connect Google Drive
+                  </button>
+                  <button id="disconnectDriveButton" class="btn btn-outline-danger">
+                    <i class="bi bi-x-circle"></i> Disconnect
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Synchronization Settings</h5>
+              </div>
+              <div class="card-body">
+                <form id="syncSettingsForm">
+                  <div class="mb-3">
+                    <label for="syncCase" class="form-label">Case to Synchronize</label>
+                    <select class="form-select" id="syncCase" name="caseId" required>
+                      <option value="" selected disabled>Select a case</option>
+                      <option value="1">Smith v. Johnson</option>
+                      <option value="2">Williams v. City Hospital</option>
+                      <option value="3">Brown v. Insurance Co.</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="syncDirection" class="form-label">Synchronization Direction</label>
+                    <select class="form-select" id="syncDirection" name="syncDirection">
+                      <option value="bidirectional" selected>Bidirectional (Two-way)</option>
+                      <option value="upload">Upload Only (System to Drive)</option>
+                      <option value="download">Download Only (Drive to System)</option>
+                    </select>
+                    <div class="form-text">Choose how documents should be synchronized between the system and Google Drive.</div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="syncAutomatic" name="syncAutomatic" value="true" checked>
+                      <label class="form-check-label" for="syncAutomatic">
+                        Enable automatic synchronization
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div id="automaticSyncOptions" class="mb-3 ps-4 border-start">
+                    <label for="syncFrequency" class="form-label">Synchronization Frequency</label>
+                    <select class="form-select" id="syncFrequency" name="syncFrequency">
+                      <option value="hourly">Hourly</option>
+                      <option value="daily" selected>Daily</option>
+                      <option value="weekly">Weekly</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="syncNotify" name="syncNotify" value="true" checked>
+                      <label class="form-check-label" for="syncNotify">
+                        Send notification after synchronization
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Manual Synchronization</h5>
+              </div>
+              <div class="card-body">
+                <div id="syncStatus" class="mb-3">
+                  <div class="alert alert-info">
+                    <i class="bi bi-info-circle-fill"></i> Last synchronization: April 18, 2025, 10:23 AM
+                    <div class="mt-2">
+                      <small>Added: 3 files, Updated: 1 file, Unchanged: 42 files</small>
+                    </div>
+                  </div>
+                </div>
+                
+                <button id="syncButton" class="btn btn-primary">
+                  <i class="bi bi-cloud-arrow-up-down"></i> Sync with Drive
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Folder Structure</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="folderStructureCase" class="form-label">Select Case</label>
+                  <select class="form-select" id="folderStructureCase">
+                    <option value="1" selected>Smith v. Johnson</option>
+                    <option value="2">Williams v. City Hospital</option>
+                    <option value="3">Brown v. Insurance Co.</option>
+                  </select>
+                </div>
+                
+                <div class="folder-structure">
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <i class="bi bi-folder-fill text-warning"></i> Smith v. Johnson
+                      <ul class="list-group mt-2">
+                        <li class="list-group-item">
+                          <i class="bi bi-folder-fill text-warning"></i> Original Documents
+                          <span class="badge bg-secondary float-end">15 files</span>
+                        </li>
+                        <li class="list-group-item">
+                          <i class="bi bi-folder-fill text-warning"></i> Labeled Documents
+                          <span class="badge bg-secondary float-end">12 files</span>
+                        </li>
+                        <li class="list-group-item">
+                          <i class="bi bi-folder-fill text-warning"></i> Pleadings
+                          <span class="badge bg-secondary float-end">5 files</span>
+                        </li>
+                        <li class="list-group-item">
+                          <i class="bi bi-folder-fill text-warning"></i> Discovery
+                          <span class="badge bg-secondary float-end">8 files</span>
+                        </li>
+                        <li class="list-group-item">
+                          <i class="bi bi-folder-fill text-warning"></i> Medical Records
+                          <span class="badge bg-secondary float-end">0 files</span>
+                        </li>
+                        <li class="list-group-item">
+                          <i class="bi bi-folder-fill text-warning"></i> Correspondence
+                          <span class="badge bg-secondary float-end">2 files</span>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-sm btn-outline-primary" id="customizeFoldersButton">
+                  <i class="bi bi-pencil"></i> Customize Folders
+                </button>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Synchronization Help</h5>
+              </div>
+              <div class="card-body">
+                <h6>About Google Drive Synchronization</h6>
+                <p>The Document Management System can synchronize documents with Google Drive to ensure you have access to your documents from anywhere.</p>
+                
+                <h6>Synchronization Options</h6>
+                <ul>
+                  <li><strong>Bidirectional:</strong> Changes in both the system and Drive are synchronized.</li>
+                  <li><strong>Upload Only:</strong> Only uploads documents from the system to Drive.</li>
+                  <li><strong>Download Only:</strong> Only downloads documents from Drive to the system.</li>
+                </ul>
+                
+                <h6>Automatic Synchronization</h6>
+                <p>When enabled, the system will automatically synchronize documents based on the selected frequency.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Toggle automatic sync options
+      $('#syncAutomatic').change(function() {
+        if ($(this).is(':checked')) {
+          $('#automaticSyncOptions').slideDown();
+        } else {
+          $('#automaticSyncOptions').slideUp();
+        }
+      });
+      
+      // Handle sync button click
+      $('#syncButton').click(function() {
+        // Disable button during sync
+        $(this).prop('disabled', true);
+        $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Syncing...');
+        
+        // Simulate sync process
+        setTimeout(() => {
+          // Update sync status
+          $('#syncStatus').html(`
+            <div class="alert alert-success">
+              <i class="bi bi-check-circle-fill"></i> Last synchronization: ${new Date().toLocaleString()}
+              <div class="mt-2">
+                <small>Added: 2 files, Updated: 3 files, Unchanged: 42 files</small>
+              </div>
+            </div>
+          `);
+          
+          // Re-enable button
+          $('#syncButton').prop('disabled', false);
+          $('#syncButton').html('<i class="bi bi-cloud-arrow-up-down"></i> Sync with Drive');
+          
+          // Show success message
+          showAlert('Synchronization completed successfully!', 'success');
+        }, 3000);
+      });
+      
+      // Handle disconnect button click
+      $('#disconnectDriveButton').click(function() {
+        if (confirm('Are you sure you want to disconnect from Google Drive?')) {
+          // Simulate disconnection
+          $('#driveConnectionStatus').html(`
+            <div class="alert alert-warning">
+              <i class="bi bi-exclamation-triangle-fill"></i> Not connected to Google Drive
+            </div>
+          `);
+          
+          // Show connect button, hide disconnect button
+          $('#connectDriveButton').show();
+          $('#disconnectDriveButton').hide();
+          
+          showAlert('Disconnected from Google Drive', 'warning');
+        }
+      });
+      
+      // Handle connect button click
+      $('#connectDriveButton').click(function() {
+        // In a real app, this would redirect to Google OAuth
+        window.location.href = '/api/drive/connect';
+      });
+      
+      // Handle customize folders button click
+      $('#customizeFoldersButton').click(function() {
+        // In a real app, this would open a modal or navigate to a folder customization page
+        showAlert('Folder customization feature coming soon!', 'info');
+      });
+      
+      // Handle sync settings form submission
+      $('#syncSettingsForm').submit(function(e) {
+        e.preventDefault();
+        
+        // Validate case selection
+        if (!$('#syncCase').val()) {
+          showAlert('Please select a case', 'danger');
+          return;
+        }
+        
+        // Simulate saving settings
+        showSpinner('Saving settings...');
+        
+        setTimeout(() => {
+          hideSpinner();
+          showAlert('Synchronization settings saved successfully!', 'success');
+        }, 1000);
+      });
+      
+      // Handle folder structure case selection
+      $('#folderStructureCase').change(function() {
+        // In a real app, this would load the folder structure for the selected case
+        showAlert('Loading folder structure for selected case...', 'info');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Documents - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse show list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li class="active">
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2>Upload Documents</h2>
+            <p class="text-muted">Upload documents to the system. Supported file types: PDF, DOC, DOCX, JPEG, PNG, TIFF.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <form id="uploadForm">
+                  <div class="mb-4">
+                    <label for="caseSelect" class="form-label">Select Case</label>
+                    <select class="form-select" id="caseSelect" name="caseId" required>
+                      <option value="" selected disabled>Select a case</option>
+                      <option value="1">Smith v. Johnson</option>
+                      <option value="2">Williams v. City Hospital</option>
+                      <option value="3">Brown v. Insurance Co.</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label for="categorySelect" class="form-label">Document Category</label>
+                    <select class="form-select" id="categorySelect" name="category">
+                      <option value="Uncategorized" selected>Uncategorized</option>
+                      <option value="Pleadings">Pleadings</option>
+                      <option value="Discovery">Discovery</option>
+                      <option value="Medical Records">Medical Records</option>
+                      <option value="Correspondence">Correspondence</option>
+                    </select>
+                    <div class="form-text">You can also let the system automatically categorize documents based on content.</div>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="uploadToDrive" name="uploadToDrive" value="true" checked>
+                      <label class="form-check-label" for="uploadToDrive">
+                        Upload to Google Drive
+                      </label>
+                      <div class="form-text">Documents will be uploaded to the case folder in Google Drive.</div>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="applyBates" name="applyBates" value="true">
+                      <label class="form-check-label" for="applyBates">
+                        Apply Bates Labels
+                      </label>
+                      <div class="form-text">Automatically apply Bates labels to uploaded documents.</div>
+                    </div>
+                  </div>
+                  
+                  <div id="batesOptions" class="mb-4 ps-4 border-start" style="display: none;">
+                    <div class="mb-3">
+                      <label for="batesConfigSelect" class="form-label">Bates Configuration</label>
+                      <select class="form-select" id="batesConfigSelect" name="batesConfigId">
+                        <option value="1">SMITH - Smith v. Johnson</option>
+                        <option value="2">WILL - Williams v. City Hospital</option>
+                        <option value="3">BROWN - Brown v. Insurance Co.</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label class="form-label">Upload Files</label>
+                    <div id="uploadZone" class="upload-zone">
+                      <i class="bi bi-cloud-upload display-4"></i>
+                      <h4>Drag & Drop Files Here</h4>
+                      <p>or</p>
+                      <button type="button" class="btn btn-primary" id="browseButton">Browse Files</button>
+                      <input type="file" id="fileUpload" name="documents" multiple style="display: none;">
+                    </div>
+                    <div id="fileList" class="mt-3"></div>
+                  </div>
+                  
+                  <div id="progressContainer" class="mb-4 d-none">
+                    <label class="form-label">Upload Progress</label>
+                    <div class="progress">
+                      <div id="uploadProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                    </div>
+                  </div>
+                  
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary me-2">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="uploadButton" disabled>Upload Documents</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Toggle Bates options
+      $('#applyBates').change(function() {
+        if ($(this).is(':checked')) {
+          $('#batesOptions').slideDown();
+        } else {
+          $('#batesOptions').slideUp();
+        }
+      });
+      
+      // File upload handling
+      const fileInput = document.getElementById('fileUpload');
+      const uploadZone = document.getElementById('uploadZone');
+      const browseButton = document.getElementById('browseButton');
+      const fileList = document.getElementById('fileList');
+      const uploadButton = document.getElementById('uploadButton');
+      
+      browseButton.addEventListener('click', () => {
+        fileInput.click();
+      });
+      
+      // Drag and drop functionality
+      uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('active');
+      });
+      
+      uploadZone.addEventListener('dragleave', () => {
+        uploadZone.classList.remove('active');
+      });
+      
+      uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('active');
+        
+        if (e.dataTransfer.files.length) {
+          fileInput.files = e.dataTransfer.files;
+          updateFileList();
+        }
+      });
+      
+      fileInput.addEventListener('change', () => {
+        updateFileList();
+      });
+      
+      // Update file list display
+      function updateFileList() {
+        fileList.innerHTML = '';
+        
+        if (fileInput.files.length === 0) {
+          uploadButton.disabled = true;
+          return;
+        }
+        
+        for (let i = 0; i < fileInput.files.length; i++) {
+          const file = fileInput.files[i];
+          const fileItem = document.createElement('div');
+          fileItem.className = 'alert alert-secondary d-flex align-items-center';
+          
+          // Determine file icon
+          let fileIconClass = 'bi-file-earmark';
+          if (file.type === 'application/pdf') {
+            fileIconClass = 'bi-file-earmark-pdf';
+          } else if (file.type.includes('word')) {
+            fileIconClass = 'bi-file-earmark-word';
+          } else if (file.type.includes('image')) {
+            fileIconClass = 'bi-file-earmark-image';
+          }
+          
+          fileItem.innerHTML = `
+            <i class="bi ${fileIconClass} me-2"></i>
+            <div class="flex-grow-1">
+              <strong>${file.name}</strong>
+              <div class="small">${formatFileSize(file.size)}</div>
+            </div>
+            <button type="button" class="btn-close" data-index="${i}"></button>
+          `;
+          
+          fileList.appendChild(fileItem);
+        }
+        
+        // Enable upload button
+        uploadButton.disabled = false;
+        
+        // Add event listeners to remove buttons
+        document.querySelectorAll('#fileList .btn-close').forEach(button => {
+          button.addEventListener('click', function() {
+            removeFile(parseInt(this.dataset.index));
+          });
+        });
+      }
+      
+      // Remove file from list
+      function removeFile(index) {
+        const dt = new DataTransfer();
+        const { files } = fileInput;
+        
+        for (let i = 0; i < files.length; i++) {
+          if (i !== index) {
+            dt.items.add(files[i]);
+          }
+        }
+        
+        fileInput.files = dt.files;
+        updateFileList();
+      }
+      
+      // Format file size
+      function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+      }
+      
+      // Handle form submission
+      $('#uploadForm').submit(function(e) {
+        e.preventDefault();
+        
+        if (fileInput.files.length === 0) {
+          showAlert('Please select files to upload', 'danger');
+          return;
+        }
+        
+        // Validate case selection
+        if (!$('#caseSelect').val()) {
+          showAlert('Please select a case', 'danger');
+          return;
+        }
+        
+        // Show progress
+        $('#progressContainer').removeClass('d-none');
+        const progressBar = $('#uploadProgress');
+        progressBar.css('width', '0%').text('0%');
+        
+        // Simulate upload progress (in a real app, this would use fetch with progress tracking)
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 5;
+          progressBar.css('width', progress + '%').text(progress + '%');
+          
+          if (progress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+              showAlert('Files uploaded successfully!', 'success');
+              $('#progressContainer').addClass('d-none');
+              $('#uploadForm')[0].reset();
+              fileList.innerHTML = '';
+              uploadButton.disabled = true;
+            }, 500);
+          }
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>

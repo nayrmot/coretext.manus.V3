@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bates Configurations - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent.html">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories.html">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases.html">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new.html">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse show list-unstyled" id="batesSubmenu">
+            <li class="active">
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry.html">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits.html">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages.html">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages.html">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring.html">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser.html">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings.html">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          
+          <!-- Global Case Selector -->
+          <div class="case-selector-container ms-3">
+            <select id="globalCaseSelector" class="form-select form-select-sm">
+              <option value="all">All Cases</option>
+              <option value="1">Smith v. Johnson</option>
+              <option value="2">Williams v. City Hospital</option>
+              <option value="3">Brown v. Insurance Co.</option>
+            </select>
+          </div>
+
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout.html">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2 data-base-title="Bates Configurations">Bates Configurations</h2>
+            <p class="text-muted">Manage your Bates numbering configurations for consistent document labeling.</p>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-12 text-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newConfigModal">
+              <i class="bi bi-plus-circle"></i> New Configuration
+            </button>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Active Configurations</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Case</th>
+                    <th scope="col">Prefix</th>
+                    <th scope="col">Format</th>
+                    <th scope="col">Current Number</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Smith Case Primary</td>
+                    <td>Smith v. Johnson</td>
+                    <td>SMITH</td>
+                    <td><code>PREFIX-000000</code></td>
+                    <td>000042</td>
+                    <td>Apr 5, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editConfigModal">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Williams Medical Records</td>
+                    <td>Williams v. City Hospital</td>
+                    <td>WILL-MED</td>
+                    <td><code>PREFIX-0000</code></td>
+                    <td>0015</td>
+                    <td>Mar 15, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editConfigModal">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Brown Insurance Docs</td>
+                    <td>Brown v. Insurance Co.</td>
+                    <td>BROWN</td>
+                    <td><code>PREFIX-00000</code></td>
+                    <td>00010</td>
+                    <td>Feb 28, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editConfigModal">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Williams Correspondence</td>
+                    <td>Williams v. City Hospital</td>
+                    <td>WILL-CORR</td>
+                    <td><code>PREFIX-000</code></td>
+                    <td>008</td>
+                    <td>Mar 20, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editConfigModal">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Configuration Templates</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                  <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Standard Legal</h5>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">Standard legal document Bates numbering format with 6-digit sequential numbers.</p>
+                    <ul class="list-group list-group-flush mb-3">
+                      <li class="list-group-item"><strong>Format:</strong> <code>PREFIX-000000</code></li>
+                      <li class="list-group-item"><strong>Example:</strong> <code>SMITH-000001</code></li>
+                      <li class="list-group-item"><strong>Digits:</strong> 6</li>
+                    </ul>
+                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#newConfigModal">
+                      Use Template
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                  <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">Compact</h5>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">Compact Bates numbering format with 4-digit sequential numbers for smaller document sets.</p>
+                    <ul class="list-group list-group-flush mb-3">
+                      <li class="list-group-item"><strong>Format:</strong> <code>PREFIX-0000</code></li>
+                      <li class="list-group-item"><strong>Example:</strong> <code>MED-0001</code></li>
+                      <li class="list-group-item"><strong>Digits:</strong> 4</li>
+                    </ul>
+                    <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#newConfigModal">
+                      Use Template
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                  <div class="card-header bg-info text-white">
+                    <h5 class="card-title mb-0">Date-Based</h5>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">Date-based Bates numbering format that includes the current year and month.</p>
+                    <ul class="list-group list-group-flush mb-3">
+                      <li class="list-group-item"><strong>Format:</strong> <code>PREFIX-YYYYMM-0000</code></li>
+                      <li class="list-group-item"><strong>Example:</strong> <code>DOC-202504-0001</code></li>
+                      <li class="list-group-item"><strong>Digits:</strong> 4 (after date)</li>
+                    </ul>
+                    <button type="button" class="btn btn-info w-100" data-bs-toggle="modal" data-bs-target="#newConfigModal">
+                      Use Template
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Configuration Modal -->
+  <div class="modal fade" id="newConfigModal" tabindex="-1" aria-labelledby="newConfigModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newConfigModalLabel">New Bates Configuration</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="newConfigForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="configName" class="form-label">Configuration Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="configName" required placeholder="e.g., Smith Case Primary">
+              </div>
+              <div class="col-md-6">
+                <label for="configCase" class="form-label">Case <span class="text-danger">*</span></label>
+                <select class="form-select" id="configCase" required>
+                  <option value="">Select Case</option>
+                  <option value="1">Smith v. Johnson</option>
+                  <option value="2">Williams v. City Hospital</option>
+                  <option value="3">Brown v. Insurance Co.</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="configPrefix" class="form-label">Prefix <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="configPrefix" required placeholder="e.g., SMITH">
+                <div class="form-text">Short text that identifies the case or document set.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="configSeparator" class="form-label">Separator</label>
+                <select class="form-select" id="configSeparator">
+                  <option value="-">Hyphen (-)</option>
+                  <option value="_">Underscore (_)</option>
+                  <option value=".">Period (.)</option>
+                  <option value="">None</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="configDigits" class="form-label">Number of Digits <span class="text-danger">*</span></label>
+                <select class="form-select" id="configDigits" required>
+                  <option value="3">3 digits (000-999)</option>
+                  <option value="4">4 digits (0000-9999)</option>
+                  <option value="5">5 digits (00000-99999)</option>
+                  <option value="6" selected>6 digits (000000-999999)</option>
+                  <option value="7">7 digits (0000000-9999999)</option>
+                  <option value="8">8 digits (00000000-99999999)</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="configStartNumber" class="form-label">Starting Number</label>
+                <input type="number" class="form-control" id="configStartNumber" value="1" min="1">
+                <div class="form-text">The first number in the sequence.</div>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="configDateFormat" class="form-label">Include Date Format</label>
+                <select class="form-select" id="configDateFormat">
+                  <option value="">No date</option>
+                  <option value="YYYY">Year only (YYYY)</option>
+                  <option value="YYYYMM">Year and month (YYYYMM)</option>
+                  <option value="YYYYMMDD">Full date (YYYYMMDD)</option>
+                </select>
+                <div class="form-text">Optionally include a date component in the Bates number.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="configSuffix" class="form-label">Suffix</label>
+                <input type="text" class="form-control" id="configSuffix" placeholder="e.g., CONF">
+                <div class="form-text">Optional text to append after the number (e.g., for confidentiality marking).</div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Preview</label>
+              <div class="p-3 bg-light border rounded">
+                <h5 class="mb-0" id="batesPreview">SMITH-000001</h5>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="configDefault">
+                <label class="form-check-label" for="configDefault">
+                  Set as default configuration for this case
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="saveConfig">Save Configuration</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Configuration Modal -->
+  <div class="modal fade" id="editConfigModal" tabindex="-1" aria-labelledby="editConfigModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editConfigModalLabel">Edit Bates Configuration</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Same form as new config, but pre-filled -->
+          <form id="editConfigForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="editConfigName" class="form-label">Configuration Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="editConfigName" required value="Smith Case Primary">
+              </div>
+              <div class="col-md-6">
+                <label for="editConfigCase" class="form-label">Case <span class="text-danger">*</span></label>
+                <select class="form-select" id="editConfigCase" required>
+                  <option value="1" selected>Smith v. Johnson</option>
+                  <option value="2">Williams v. City Hospital</option>
+                  <option value="3">Brown v. Insurance Co.</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="editConfigPrefix" class="form-label">Prefix <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="editConfigPrefix" required value="SMITH">
+                <div class="form-text">Short text that identifies the case or document set.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="editConfigSeparator" class="form-label">Separator</label>
+                <select class="form-select" id="editConfigSeparator">
+                  <option value="-" selected>Hyphen (-)</option>
+                  <option value="_">Underscore (_)</option>
+                  <option value=".">Period (.)</option>
+                  <option value="">None</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="editConfigDigits" class="form-label">Number of Digits <span class="text-danger">*</span></label>
+                <select class="form-select" id="editConfigDigits" required>
+                  <option value="3">3 digits (000-999)</option>
+                  <option value="4">4 digits (0000-9999)</option>
+                  <option value="5">5 digits (00000-99999)</option>
+                  <option value="6" selected>6 digits (000000-999999)</option>
+                  <option value="7">7 digits (0000000-9999999)</option>
+                  <option value="8">8 digits (00000000-99999999)</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="editConfigCurrentNumber" class="form-label">Current Number</label>
+                <input type="number" class="form-control" id="editConfigCurrentNumber" value="42" min="1" readonly>
+                <div class="form-text">The current number in the sequence (cannot be edited).</div>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="editConfigDateFormat" class="form-label">Include Date Format</label>
+                <select class="form-select" id="editConfigDateFormat">
+                  <option value="" selected>No date</option>
+                  <option value="YYYY">Year only (YYYY)</option>
+                  <option value="YYYYMM">Year and month (YYYYMM)</option>
+                  <option value="YYYYMMDD">Full date (YYYYMMDD)</option>
+                </select>
+                <div class="form-text">Optionally include a date component in the Bates number.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="editConfigSuffix" class="form-label">Suffix</label>
+                <input type="text" class="form-control" id="editConfigSuffix" placeholder="e.g., CONF">
+                <div class="form-text">Optional text to append after the number (e.g., for confidentiality marking).</div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Preview</label>
+              <div class="p-3 bg-light border rounded">
+                <h5 class="mb-0" id="editBatesPreview">SMITH-000042</h5>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="editConfigDefault" checked>
+                <label class="form-check-label" for="editConfigDefault">
+                  Set as default configuration for this case
+                </label>
+              </div>
+            </div>
+            
+            <div class="alert alert-warning">
+              <i class="bi bi-exclamation-triangle-fill"></i> Warning: Changing the format of an existing Bates configuration may affect document consistency. New settings will only apply to future documents.
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="updateConfig">Update Configuration</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Update preview when form fields change
+      $('#configPrefix, #configSeparator, #configDigits, #configDateFormat, #configSuffix').on('change keyup', function() {
+        updatePreview();
+      });
+      
+      // Edit form preview update
+      $('#editConfigPrefix, #editConfigSeparator, #editConfigDigits, #editConfigDateFormat, #editConfigSuffix').on('change keyup', function() {
+        updateEditPreview();
+      });
+      
+      // Save configuration button
+      $('#saveConfig').click(function() {
+        if (!validateForm('#newConfigForm')) {
+          return;
+        }
+        
+        // Show loading state
+        showSpinner('Saving configuration...');
+        
+        // Simulate API call
+        setTimeout(() => {
+          hideSpinner();
+          $('#newConfigModal').modal('hide');
+          showAlert('Bates configuration created successfully!', 'success');
+          
+          // Reset form
+          $('#newConfigForm')[0].reset();
+        }, 800);
+      });
+      
+      // Update configuration button
+      $('#updateConfig').click(function() {
+        if (!validateForm('#editConfigForm')) {
+          return;
+        }
+        
+        // Show loading state
+        showSpinner('Updating configuration...');
+        
+        // Simulate API call
+        setTimeout(() => {
+          hideSpinner();
+          $('#editConfigModal').modal('hide');
+          showAlert('Bates configuration updated successfully!', 'success');
+        }, 800);
+      });
+      
+      // Initialize preview
+      updatePreview();
+      updateEditPreview();
+    });
+    
+    function updatePreview() {
+      const prefix = $('#configPrefix').val() || 'PREFIX';
+      const separator = $('#configSeparator').val() || '';
+      const digits = parseInt($('#configDigits').val()) || 6;
+      const startNumber = parseInt($('#configStartNumber').val()) || 1;
+      const dateFormat = $('#configDateFormat').val();
+      const suffix = $('#configSuffix').val();
+      
+      let preview = prefix;
+      
+      if (dateFormat) {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        
+        let dateString = '';
+        if (dateFormat === 'YYYY') {
+          dateString = year;
+        } else if (dateFormat === 'YYYYMM') {
+          dateString = `${year}${month}`;
+        } else if (dateFormat === 'YYYYMMDD') {
+          dateString = `${year}${month}${day}`;
+        }
+        
+        preview += `${separator}${dateString}`;
+      }
+      
+      preview += `${separator}${String(startNumber).padStart(digits, '0')}`;
+      
+      if (suffix) {
+        preview += `${separator}${suffix}`;
+      }
+      
+      $('#batesPreview').text(preview);
+    }
+    
+    function updateEditPreview() {
+      const prefix = $('#editConfigPrefix').val() || 'PREFIX';
+      const separator = $('#editConfigSeparator').val() || '';
+      const digits = parseInt($('#editConfigDigits').val()) || 6;
+      const currentNumber = parseInt($('#editConfigCurrentNumber').val()) || 42;
+      const dateFormat = $('#editConfigDateFormat').val();
+      const suffix = $('#editConfigSuffix').val();
+      
+      let preview = prefix;
+      
+      if (dateFormat) {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        
+        let dateString = '';
+        if (dateFormat === 'YYYY') {
+          dateString = year;
+        } else if (dateFormat === 'YYYYMM') {
+          dateString = `${year}${month}`;
+        } else if (dateFormat === 'YYYYMMDD') {
+          dateString = `${year}${month}${day}`;
+        }
+        
+        preview += `${separator}${dateString}`;
+      }
+      
+      preview += `${separator}${String(currentNumber).padStart(digits, '0')}`;
+      
+      if (suffix) {
+        preview += `${separator}${suffix}`;
+      }
+      
+      $('#editBatesPreview').text(preview);
+    }
+    
+    function validateForm(formSelector) {
+      let isValid = true;
+      
+      $(formSelector + ' [required]').each(function() {
+        if (!$(this).val()) {
+          $(this).addClass('is-invalid');
+          isValid = false;
+        } else {
+          $(this).removeClass('is-invalid');
+        }
+      });
+      
+      if (!isValid) {
+        showAlert('Please fill in all required fields.', 'danger');
+      }
+      
+      return isValid;
+    }
+    
+    function showAlert(message, type) {
+      const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      
+      $('#alertContainer').html(alertHtml);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        $('.alert').alert('close');
+      }, 5000);
+    }
+    
+    function showSpinner(message) {
+      // Implementation would be in main.js
+      console.log('Showing spinner: ' + message);
+    }
+    
+    function hideSpinner() {
+      // Implementation would be in main.js
+      console.log('Hiding spinner');
+    }
+  </script>
+</body>
+</html>

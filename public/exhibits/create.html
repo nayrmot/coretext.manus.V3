@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Exhibit - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse show list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits">All Exhibits</a>
+            </li>
+            <li class="active">
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2>Create Exhibit</h2>
+            <p class="text-muted">Create and manage exhibits for litigation.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-body">
+                <form id="exhibitForm">
+                  <div class="mb-4">
+                    <label for="exhibitCase" class="form-label">Select Case</label>
+                    <select class="form-select" id="exhibitCase" name="caseId" required>
+                      <option value="" selected disabled>Select a case</option>
+                      <option value="1">Smith v. Johnson</option>
+                      <option value="2">Williams v. City Hospital</option>
+                      <option value="3">Brown v. Insurance Co.</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label for="exhibitNumber" class="form-label">Exhibit Number/Letter</label>
+                    <div class="input-group">
+                      <select class="form-select" id="exhibitPrefix" name="exhibitPrefix" style="max-width: 100px;">
+                        <option value="Exhibit" selected>Exhibit</option>
+                        <option value="Ex.">Ex.</option>
+                        <option value="P">P</option>
+                        <option value="D">D</option>
+                        <option value="PX">PX</option>
+                        <option value="DX">DX</option>
+                      </select>
+                      <input type="text" class="form-control" id="exhibitNumber" name="exhibitNumber" placeholder="A" required>
+                    </div>
+                    <div class="form-text">Enter a number (1, 2, 3) or letter (A, B, C) for the exhibit.</div>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label for="exhibitDescription" class="form-label">Exhibit Description</label>
+                    <input type="text" class="form-control" id="exhibitDescription" name="exhibitDescription" placeholder="e.g., Contract dated January 1, 2023" required>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label class="form-label">Select Document</label>
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="width: 40px;"></th>
+                            <th scope="col">Document</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Bates Number</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <input type="radio" class="form-check-input document-select" name="documentId" value="1" required>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <i class="bi bi-file-earmark-pdf file-icon file-pdf"></i>
+                                <div>Complaint.pdf</div>
+                              </div>
+                            </td>
+                            <td><span class="badge bg-primary">Pleadings</span></td>
+                            <td><span class="bates-label">SMITH000001</span></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <input type="radio" class="form-check-input document-select" name="documentId" value="2">
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <i class="bi bi-file-earmark-word file-icon file-word"></i>
+                                <div>Deposition_Transcript.docx</div>
+                              </div>
+                            </td>
+                            <td><span class="badge bg-warning">Discovery</span></td>
+                            <td><span class="bates-label">SMITH000025</span></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <input type="radio" class="form-check-input document-select" name="documentId" value="3">
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <i class="bi bi-file-earmark-image file-icon file-image"></i>
+                                <div>Accident_Scene_Photo.jpg</div>
+                              </div>
+                            </td>
+                            <td><span class="badge bg-warning">Discovery</span></td>
+                            <td><span class="bates-label">SMITH000042</span></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <input type="radio" class="form-check-input document-select" name="documentId" value="4">
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <i class="bi bi-file-earmark-pdf file-icon file-pdf"></i>
+                                <div>Expert_Report.pdf</div>
+                              </div>
+                            </td>
+                            <td><span class="badge bg-warning">Discovery</span></td>
+                            <td><span class="bates-label">BROWN000010</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="exhibitApplySticker" name="applySticker" value="true" checked>
+                      <label class="form-check-label" for="exhibitApplySticker">
+                        Apply exhibit sticker to document
+                      </label>
+                      <div class="form-text">Adds an exhibit sticker to the first page of the document.</div>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="exhibitAddToPackage" name="addToPackage" value="true">
+                      <label class="form-check-label" for="exhibitAddToPackage">
+                        Add to exhibit package
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div id="packageOptions" class="mb-4 ps-4 border-start" style="display: none;">
+                    <div class="mb-3">
+                      <label for="exhibitPackage" class="form-label">Select Package</label>
+                      <select class="form-select" id="exhibitPackage" name="packageId">
+                        <option value="new" selected>Create new package</option>
+                        <option value="1">Smith Deposition Exhibits</option>
+                        <option value="2">Johnson Deposition Exhibits</option>
+                        <option value="3">Trial Exhibits</option>
+                      </select>
+                    </div>
+                    
+                    <div id="newPackageOptions">
+                      <div class="mb-3">
+                        <label for="packageName" class="form-label">Package Name</label>
+                        <input type="text" class="form-control" id="packageName" name="packageName" placeholder="e.g., Smith Deposition Exhibits">
+                      </div>
+                      
+                      <div class="mb-3">
+                        <label for="packageDescription" class="form-label">Package Description</label>
+                        <textarea class="form-control" id="packageDescription" name="packageDescription" rows="2" placeholder="Brief description of the exhibit package"></textarea>
+                      </div>
+                      
+                      <div class="mb-3">
+                        <label for="packageEventType" class="form-label">Event Type</label>
+                        <select class="form-select" id="packageEventType" name="eventType">
+                          <option value="deposition" selected>Deposition</option>
+                          <option value="hearing">Hearing</option>
+                          <option value="trial">Trial</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div id="progressContainer" class="mb-4 d-none">
+                    <label class="form-label">Processing Progress</label>
+                    <div class="progress">
+                      <div id="exhibitProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                    </div>
+                  </div>
+                  
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary me-2">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="createExhibitButton">Create Exhibit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Exhibit Information</h5>
+              </div>
+              <div class="card-body">
+                <h6>What are Exhibits?</h6>
+                <p>Exhibits are documents or other items that are formally presented as evidence in a legal proceeding. They are typically marked with an exhibit number or letter for easy reference.</p>
+                
+                <h6>Exhibit Stickers</h6>
+                <p>Exhibit stickers are labels applied to documents to identify them as exhibits. The system can automatically apply exhibit stickers to the first page of documents.</p>
+                
+                <h6>Exhibit Packages</h6>
+                <p>Exhibit packages are collections of exhibits grouped together for a specific purpose, such as a deposition, hearing, or trial. Creating packages makes it easier to manage and distribute related exhibits.</p>
+                
+                <h6>Best Practices</h6>
+                <ul>
+                  <li>Use consistent exhibit numbering within each case</li>
+                  <li>Provide clear, descriptive names for exhibits</li>
+                  <li>Organize exhibits into packages based on their use</li>
+                  <li>Apply Bates labels before creating exhibits</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Toggle package options
+      $('#exhibitAddToPackage').change(function() {
+        if ($(this).is(':checked')) {
+          $('#packageOptions').slideDown();
+        } else {
+          $('#packageOptions').slideUp();
+        }
+      });
+      
+      // Toggle new package options
+      $('#exhibitPackage').change(function() {
+        if ($(this).val() === 'new') {
+          $('#newPackageOptions').slideDown();
+        } else {
+          $('#newPackageOptions').slideUp();
+        }
+      });
+      
+      // Handle form submission
+      $('#exhibitForm').submit(function(e) {
+        e.preventDefault();
+        
+        // Validate case selection
+        if (!$('#exhibitCase').val()) {
+          showAlert('Please select a case', 'danger');
+          return;
+        }
+        
+        // Validate document selection
+        if (!$('input[name="documentId"]:checked').val()) {
+          showAlert('Please select a document', 'danger');
+          return;
+        }
+        
+        // Validate package name if creating new package
+        if ($('#exhibitAddToPackage').is(':checked') && $('#exhibitPackage').val() === 'new' && !$('#packageName').val()) {
+          showAlert('Please enter a package name', 'danger');
+          return;
+        }
+        
+        // Show progress
+        $('#progressContainer').removeClass('d-none');
+        const progressBar = $('#exhibitProgress');
+        progressBar.css('width', '0%').text('0%');
+        
+        // Disable submit button
+        $('#createExhibitButton').prop('disabled', true);
+        
+        // Simulate processing (in a real app, this would be an API call)
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 10;
+          progressBar.css('width', progress + '%').text(progress + '%');
+          
+          if (progress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+              showAlert('Exhibit created successfully!', 'success');
+              $('#progressContainer').addClass('d-none');
+              $('#createExhibitButton').prop('disabled', false);
+            }, 500);
+          }
+        }, 300);
+      });
+    });
+  </script>
+</body>
+</html>

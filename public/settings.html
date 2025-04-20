@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent.html">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories.html">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases.html">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new.html">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry.html">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits.html">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages.html">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages.html">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring.html">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser.html">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="/settings.html">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout.html">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2>Settings</h2>
+            <p class="text-muted">Configure application settings and preferences.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 mb-4">
+            <div class="list-group">
+              <a href="#generalSettings" class="list-group-item list-group-item-action active" data-bs-toggle="list">
+                <i class="bi bi-gear"></i> General
+              </a>
+              <a href="#userSettings" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                <i class="bi bi-person"></i> User Profile
+              </a>
+              <a href="#notificationSettings" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                <i class="bi bi-bell"></i> Notifications
+              </a>
+              <a href="#integrationSettings" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                <i class="bi bi-link-45deg"></i> Integrations
+              </a>
+              <a href="#securitySettings" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                <i class="bi bi-shield-lock"></i> Security
+              </a>
+              <a href="#storageSettings" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                <i class="bi bi-hdd"></i> Storage
+              </a>
+              <a href="#apiSettings" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                <i class="bi bi-code-square"></i> API Access
+              </a>
+              <a href="#advancedSettings" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                <i class="bi bi-sliders"></i> Advanced
+              </a>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="tab-content">
+              <!-- General Settings -->
+              <div class="tab-pane fade show active" id="generalSettings">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">General Settings</h5>
+                  </div>
+                  <div class="card-body">
+                    <form id="generalSettingsForm">
+                      <div class="mb-3">
+                        <label for="appName" class="form-label">Application Name</label>
+                        <input type="text" class="form-control" id="appName" value="Document Management System">
+                      </div>
+                      <div class="mb-3">
+                        <label for="defaultDateFormat" class="form-label">Default Date Format</label>
+                        <select class="form-select" id="defaultDateFormat">
+                          <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                          <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                          <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="defaultTimeFormat" class="form-label">Default Time Format</label>
+                        <select class="form-select" id="defaultTimeFormat">
+                          <option value="12">12-hour (AM/PM)</option>
+                          <option value="24">24-hour</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="defaultLanguage" class="form-label">Default Language</label>
+                        <select class="form-select" id="defaultLanguage">
+                          <option value="en">English</option>
+                          <option value="es">Spanish</option>
+                          <option value="fr">French</option>
+                          <option value="de">German</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="itemsPerPage" class="form-label">Items Per Page</label>
+                        <select class="form-select" id="itemsPerPage">
+                          <option value="10">10</option>
+                          <option value="25" selected>25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="enableDarkMode">
+                        <label class="form-check-label" for="enableDarkMode">Enable Dark Mode</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="autoSave" checked>
+                        <label class="form-check-label" for="autoSave">Enable Auto-Save</label>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- User Profile Settings -->
+              <div class="tab-pane fade" id="userSettings">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">User Profile</h5>
+                  </div>
+                  <div class="card-body">
+                    <form id="userProfileForm">
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <label for="firstName" class="form-label">First Name</label>
+                          <input type="text" class="form-control" id="firstName" value="John">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="lastName" class="form-label">Last Name</label>
+                          <input type="text" class="form-control" id="lastName" value="Doe">
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" value="john.doe@example.com">
+                      </div>
+                      <div class="mb-3">
+                        <label for="jobTitle" class="form-label">Job Title</label>
+                        <input type="text" class="form-control" id="jobTitle" value="Attorney">
+                      </div>
+                      <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" value="(555) 123-4567">
+                      </div>
+                      <div class="mb-3">
+                        <label for="timezone" class="form-label">Timezone</label>
+                        <select class="form-select" id="timezone">
+                          <option value="America/New_York">Eastern Time (ET)</option>
+                          <option value="America/Chicago">Central Time (CT)</option>
+                          <option value="America/Denver">Mountain Time (MT)</option>
+                          <option value="America/Los_Angeles" selected>Pacific Time (PT)</option>
+                          <option value="America/Anchorage">Alaska Time (AKT)</option>
+                          <option value="Pacific/Honolulu">Hawaii Time (HT)</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="profilePicture" class="form-label">Profile Picture</label>
+                        <input class="form-control" type="file" id="profilePicture">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Notification Settings -->
+              <div class="tab-pane fade" id="notificationSettings">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Notification Settings</h5>
+                  </div>
+                  <div class="card-body">
+                    <form id="notificationSettingsForm">
+                      <h6 class="mb-3">Email Notifications</h6>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="emailNewDocuments" checked>
+                        <label class="form-check-label" for="emailNewDocuments">New document uploads</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="emailBatesLabels" checked>
+                        <label class="form-check-label" for="emailBatesLabels">Bates label applications</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="emailExhibits" checked>
+                        <label class="form-check-label" for="emailExhibits">New exhibit creations</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="emailCaseUpdates" checked>
+                        <label class="form-check-label" for="emailCaseUpdates">Case updates</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="emailSystemAlerts">
+                        <label class="form-check-label" for="emailSystemAlerts">System alerts</label>
+                      </div>
+                      
+                      <hr>
+                      
+                      <h6 class="mb-3">In-App Notifications</h6>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="appNewDocuments" checked>
+                        <label class="form-check-label" for="appNewDocuments">New document uploads</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="appBatesLabels" checked>
+                        <label class="form-check-label" for="appBatesLabels">Bates label applications</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="appExhibits" checked>
+                        <label class="form-check-label" for="appExhibits">New exhibit creations</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="appCaseUpdates" checked>
+                        <label class="form-check-label" for="appCaseUpdates">Case updates</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="appSystemAlerts" checked>
+                        <label class="form-check-label" for="appSystemAlerts">System alerts</label>
+                      </div>
+                      
+                      <hr>
+                      
+                      <h6 class="mb-3">Notification Digest</h6>
+                      <div class="mb-3">
+                        <label for="digestFrequency" class="form-label">Email Digest Frequency</label>
+                        <select class="form-select" id="digestFrequency">
+                          <option value="never">Never (send immediately)</option>
+                          <option value="daily" selected>Daily</option>
+                          <option value="weekly">Weekly</option>
+                        </select>
+                      </div>
+                      
+                      <button type="submit" class="btn btn-primary">Save Notification Settings</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Integration Settings -->
+              <div class="tab-pane fade" id="integrationSettings">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Integration Settings</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-4">
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">Google Drive</h6>
+                        <span class="badge bg-success">Connected</span>
+                      </div>
+                      <p class="text-muted">Connected as john.doe@example.com</p>
+                      <div class="d-flex">
+                        <button class="btn btn-sm btn-outline-primary me-2">Reconfigure</button>
+                        <button class="btn btn-sm btn-outline-danger">Disconnect</button>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">Gmail</h6>
+                        <span class="badge bg-success">Connected</span>
+                      </div>
+                      <p class="text-muted">Connected as john.doe@example.com</p>
+                      <div class="d-flex">
+                        <button class="btn btn-sm btn-outline-primary me-2">Reconfigure</button>
+                        <button class="btn btn-sm btn-outline-danger">Disconnect</button>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">Microsoft OneDrive</h6>
+                        <span class="badge bg-secondary">Not Connected</span>
+                      </div>
+                      <p class="text-muted">Connect to sync documents with OneDrive</p>
+                      <button class="btn btn-sm btn-outline-primary">Connect</button>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">Dropbox</h6>
+                        <span class="badge bg-secondary">Not Connected</span>
+                      </div>
+                      <p class="text-muted">Connect to sync documents with Dropbox</p>
+                      <button class="btn btn-sm btn-outline-primary">Connect</button>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">Slack</h6>
+                        <span class="badge bg-secondary">Not Connected</span>
+                      </div>
+                      <p class="text-muted">Connect to receive notifications in Slack</p>
+                      <button class="btn btn-sm btn-outline-primary">Connect</button>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">Microsoft Teams</h6>
+                        <span class="badge bg-secondary">Not Connected</span>
+                      </div>
+                      <p class="text-muted">Connect to receive notifications in Teams</p>
+                      <button class="btn btn-sm btn-outline-primary">Connect</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Security Settings -->
+              <div class="tab-pane fade" id="securitySettings">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Security Settings</h5>
+                  </div>
+                  <div class="card-body">
+                    <form id="securitySettingsForm">
+                      <h6 class="mb-3">Password</h6>
+                      <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Current Password</label>
+                        <input type="password" class="form-control" id="currentPassword">
+                      </div>
+                      <div class="mb-3">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="newPassword">
+                      </div>
+                      <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirmPassword">
+                      </div>
+                      <button type="button" class="btn btn-primary mb-4">Change Password</button>
+                      
+                      <hr>
+                      
+                      <h6 class="mb-3">Two-Factor Authentication</h6>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="enable2FA">
+                        <label class="form-check-label" for="enable2FA">Enable Two-Factor Authentication</label>
+                      </div>
+                      <button type="button" class="btn btn-outline-primary mb-4">Configure 2FA</button>
+                      
+                      <hr>
+                      
+                      <h6 class="mb-3">Session Management</h6>
+                      <div class="mb-3">
+                        <label for="sessionTimeout" class="form-label">Session Timeout (minutes)</label>
+                        <input type="number" class="form-control" id="sessionTimeout" value="30" min="5" max="240">
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" checked>
+                        <label class="form-check-label" for="rememberMe">Allow "Remember Me" Option</label>
+                      </div>
+                      
+                      <hr>
+                      
+                      <h6 class="mb-3">Active Sessions</h6>
+                      <div class="table-responsive mb-3">
+                        <table class="table table-sm">
+                          <thead>
+                            <tr>
+                              <th>Device</th>
+                              <th>Location</th>
+                              <th>Last Active</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Chrome on Windows</td>
+                              <td>Los Angeles, CA</td>
+                              <td>Now (Current)</td>
+                              <td><span class="badge bg-primary">Current</span></td>
+                            </tr>
+                            <tr>
+                              <td>Safari on iPhone</td>
+                              <td>Los Angeles, CA</td>
+                              <td>2 hours ago</td>
+                              <td><button class="btn btn-sm btn-outline-danger">Revoke</button></td>
+                            </tr>
+                            <tr>
+                              <td>Firefox on MacOS</td>
+                              <td>San Francisco, CA</td>
+                              <td>Yesterday</td>
+                              <td><button class="btn btn-sm btn-outline-danger">Revoke</button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <button type="button" class="btn btn-outline-danger">Revoke All Other Sessions</button>
+                      
+                      <hr>
+                      
+                      <h6 class="mb-3">Login History</h6>
+                      <div class="table-responsive">
+                        <table class="table table-sm">
+                          <thead>
+                            <tr>
+                              <th>Date & Time</th>
+                              <th>Device</th>
+                              <th>Location</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Apr 20, 2025 9:30 AM</td>
+                              <td>Chrome on Windows</td>
+                              <td>Los Angeles, CA</td>
+                              <td><span class="badge bg-success">Success</span></td>
+                            </tr>
+                            <tr>
+                              <td>Apr 19, 2025 2:15 PM</td>
+                              <td>Safari on iPhone</td>
+                              <td>Los Angeles, CA</td>
+                              <td><span class="badge bg-success">Success</span></td>
+                            </tr>
+                            <tr>
+                              <td>Apr 18, 2025 10:45 AM</td>
+                              <td>Firefox on MacOS</td>
+                              <td>San Francisco, CA</td>
+                              <td><span class="badge bg-success">Success</span></td>
+                            </tr>
+                            <tr>
+                              <td>Apr 17, 2025 8:20 AM</td>
+                              <td>Unknown</td>
+                              <td>New York, NY</td>
+                              <td><span class="badge bg-danger">Failed</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Storage Settings -->
+              <div class="tab-pane fade" id="storageSettings">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Storage Settings</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-4">
+                      <h6>Storage Usage</h6>
+                      <div class="progress mb-2">
+                        <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                      </div>
+                      <p class="text-muted">6.5 GB used of 10 GB total</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>Storage Breakdown</h6>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Category</th>
+                              <th>Size</th>
+                              <th>Percentage</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Documents</td>
+                              <td>4.2 GB</td>
+                              <td>64.6%</td>
+                            </tr>
+                            <tr>
+                              <td>Images</td>
+                              <td>1.5 GB</td>
+                              <td>23.1%</td>
+                            </tr>
+                            <tr>
+                              <td>Exhibits</td>
+                              <td>0.5 GB</td>
+                              <td>7.7%</td>
+                            </tr>
+                            <tr>
+                              <td>Other</td>
+                              <td>0.3 GB</td>
+                              <td>4.6%</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>Storage Options</h6>
+                      <div class="mb-3">
+                        <label for="defaultStorage" class="form-label">Default Storage Location</label>
+                        <select class="form-select" id="defaultStorage">
+                          <option value="local" selected>Local Storage</option>
+                          <option value="google_drive">Google Drive</option>
+                          <option value="onedrive">Microsoft OneDrive</option>
+                          <option value="dropbox">Dropbox</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="compressFiles" checked>
+                        <label class="form-check-label" for="compressFiles">Compress files when possible</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="deduplication" checked>
+                        <label class="form-check-label" for="deduplication">Enable file deduplication</label>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>Storage Plans</h6>
+                      <div class="card mb-3">
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                              <h6 class="mb-1">Basic Plan</h6>
+                              <p class="mb-0 text-muted">10 GB Storage</p>
+                            </div>
+                            <span class="badge bg-success">Current Plan</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card mb-3">
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                              <h6 class="mb-1">Professional Plan</h6>
+                              <p class="mb-0 text-muted">100 GB Storage</p>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary">Upgrade</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card mb-3">
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                              <h6 class="mb-1">Enterprise Plan</h6>
+                              <p class="mb-0 text-muted">1 TB Storage</p>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary">Upgrade</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary">Save Storage Settings</button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- API Access Settings -->
+              <div class="tab-pane fade" id="apiSettings">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">API Access</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-4">
+                      <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="mb-0">API Access</h6>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="enableApi" checked>
+                          <label class="form-check-label" for="enableApi">Enabled</label>
+                        </div>
+                      </div>
+                      <p class="text-muted">Enable API access to allow integration with third-party applications.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>API Keys</h6>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Key Name</th>
+                              <th>Created</th>
+                              <th>Last Used</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Primary API Key</td>
+                              <td>Apr 10, 2025</td>
+                              <td>Apr 19, 2025</td>
+                              <td>
+                                <button class="btn btn-sm btn-outline-secondary me-1">View</button>
+                                <button class="btn btn-sm btn-outline-danger">Revoke</button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Development Key</td>
+                              <td>Apr 15, 2025</td>
+                              <td>Apr 18, 2025</td>
+                              <td>
+                                <button class="btn btn-sm btn-outline-secondary me-1">View</button>
+                                <button class="btn btn-sm btn-outline-danger">Revoke</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <button class="btn btn-outline-primary">Generate New API Key</button>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>API Rate Limits</h6>
+                      <div class="mb-3">
+                        <label for="rateLimit" class="form-label">Requests per minute</label>
+                        <select class="form-select" id="rateLimit">
+                          <option value="60">60 (Default)</option>
+                          <option value="120">120</option>
+                          <option value="300">300</option>
+                          <option value="600">600</option>
+                          <option value="1200">1200</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>Webhook Configuration</h6>
+                      <div class="mb-3">
+                        <label for="webhookUrl" class="form-label">Webhook URL</label>
+                        <input type="url" class="form-control" id="webhookUrl" placeholder="https://example.com/webhook">
+                      </div>
+                      <div class="mb-3">
+                        <label for="webhookSecret" class="form-label">Webhook Secret</label>
+                        <div class="input-group">
+                          <input type="password" class="form-control" id="webhookSecret" value="whsec_abcdefghijklmnopqrstuvwxyz">
+                          <button class="btn btn-outline-secondary" type="button">Show</button>
+                          <button class="btn btn-outline-secondary" type="button">Regenerate</button>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Webhook Events</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="webhookDocuments" checked>
+                          <label class="form-check-label" for="webhookDocuments">Document events</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="webhookCases" checked>
+                          <label class="form-check-label" for="webhookCases">Case events</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="webhookExhibits" checked>
+                          <label class="form-check-label" for="webhookExhibits">Exhibit events</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="webhookBates">
+                          <label class="form-check-label" for="webhookBates">Bates numbering events</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="webhookUsers">
+                          <label class="form-check-label" for="webhookUsers">User events</label>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary">Save API Settings</button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Advanced Settings -->
+              <div class="tab-pane fade" id="advancedSettings">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Advanced Settings</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="alert alert-warning">
+                      <i class="bi bi-exclamation-triangle-fill"></i> Warning: These settings are for advanced users. Incorrect configuration may affect system performance.
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>System Performance</h6>
+                      <div class="mb-3">
+                        <label for="cacheLifetime" class="form-label">Cache Lifetime (minutes)</label>
+                        <input type="number" class="form-control" id="cacheLifetime" value="60" min="5" max="1440">
+                      </div>
+                      <div class="mb-3">
+                        <label for="maxUploadSize" class="form-label">Maximum Upload Size (MB)</label>
+                        <input type="number" class="form-control" id="maxUploadSize" value="100" min="1" max="1000">
+                      </div>
+                      <div class="mb-3">
+                        <label for="concurrentUploads" class="form-label">Maximum Concurrent Uploads</label>
+                        <input type="number" class="form-control" id="concurrentUploads" value="3" min="1" max="10">
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>Document Processing</h6>
+                      <div class="mb-3">
+                        <label for="ocrEngine" class="form-label">OCR Engine</label>
+                        <select class="form-select" id="ocrEngine">
+                          <option value="tesseract">Tesseract (Default)</option>
+                          <option value="google_vision">Google Vision API</option>
+                          <option value="azure_ocr">Azure Computer Vision</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="ocrLanguages" class="form-label">OCR Languages</label>
+                        <select class="form-select" id="ocrLanguages" multiple>
+                          <option value="eng" selected>English</option>
+                          <option value="spa">Spanish</option>
+                          <option value="fra">French</option>
+                          <option value="deu">German</option>
+                          <option value="ita">Italian</option>
+                          <option value="por">Portuguese</option>
+                          <option value="rus">Russian</option>
+                          <option value="jpn">Japanese</option>
+                          <option value="kor">Korean</option>
+                          <option value="zho">Chinese</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="autoOcr" checked>
+                        <label class="form-check-label" for="autoOcr">Automatically OCR uploaded documents</label>
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="autoMetadata" checked>
+                        <label class="form-check-label" for="autoMetadata">Automatically extract metadata</label>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>Backup & Maintenance</h6>
+                      <div class="mb-3">
+                        <label for="backupSchedule" class="form-label">Backup Schedule</label>
+                        <select class="form-select" id="backupSchedule">
+                          <option value="daily">Daily</option>
+                          <option value="weekly" selected>Weekly</option>
+                          <option value="monthly">Monthly</option>
+                          <option value="never">Never</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="backupRetention" class="form-label">Backup Retention (days)</label>
+                        <input type="number" class="form-control" id="backupRetention" value="30" min="1" max="365">
+                      </div>
+                      <div class="mb-3">
+                        <label for="maintenanceWindow" class="form-label">Maintenance Window</label>
+                        <select class="form-select" id="maintenanceWindow">
+                          <option value="00:00-04:00">12 AM - 4 AM</option>
+                          <option value="01:00-05:00">1 AM - 5 AM</option>
+                          <option value="02:00-06:00" selected>2 AM - 6 AM</option>
+                          <option value="22:00-02:00">10 PM - 2 AM</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>System Logs</h6>
+                      <div class="mb-3">
+                        <label for="logLevel" class="form-label">Log Level</label>
+                        <select class="form-select" id="logLevel">
+                          <option value="error">Error</option>
+                          <option value="warning">Warning</option>
+                          <option value="info" selected>Info</option>
+                          <option value="debug">Debug</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="logRetention" class="form-label">Log Retention (days)</label>
+                        <input type="number" class="form-control" id="logRetention" value="14" min="1" max="90">
+                      </div>
+                      <button type="button" class="btn btn-outline-secondary">Download System Logs</button>
+                    </div>
+                    
+                    <div class="mb-4">
+                      <h6>Danger Zone</h6>
+                      <div class="card border-danger">
+                        <div class="card-body">
+                          <h6 class="card-title text-danger">Reset Application</h6>
+                          <p class="card-text">This will reset all application settings to default values. This action cannot be undone.</p>
+                          <button type="button" class="btn btn-outline-danger">Reset Application</button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary">Save Advanced Settings</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Form submission handlers
+      $('#generalSettingsForm').on('submit', function(e) {
+        e.preventDefault();
+        showAlert('General settings saved successfully!', 'success');
+      });
+      
+      $('#userProfileForm').on('submit', function(e) {
+        e.preventDefault();
+        showAlert('User profile updated successfully!', 'success');
+      });
+      
+      $('#notificationSettingsForm').on('submit', function(e) {
+        e.preventDefault();
+        showAlert('Notification settings saved successfully!', 'success');
+      });
+      
+      // Handle tab navigation from URL hash
+      let hash = window.location.hash;
+      if (hash) {
+        $('.list-group-item[href="' + hash + '"]').tab('show');
+      }
+      
+      // Update URL hash on tab change
+      $('.list-group-item').on('click', function (e) {
+        window.location.hash = $(this).attr('href');
+      });
+    });
+    
+    function showAlert(message, type) {
+      const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      
+      $('#alertContainer').html(alertHtml);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        $('.alert').alert('close');
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

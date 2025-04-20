@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Case - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent.html">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories.html">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse show list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases.html">All Cases</a>
+            </li>
+            <li class="active">
+              <a href="/cases/new.html">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry.html">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits.html">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages.html">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages.html">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring.html">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser.html">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings.html">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout.html">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2>Create New Case</h2>
+            <p class="text-muted">Enter the details for the new legal case.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <form id="newCaseForm">
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <h4>Case Information</h4>
+                  <hr>
+                  <div class="mb-3">
+                    <label for="caseName" class="form-label">Case Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="caseName" required placeholder="e.g., Smith v. Johnson">
+                    <div class="form-text">Enter the full case name as it appears on court documents.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="caseNumber" class="form-label">Case Number</label>
+                    <input type="text" class="form-control" id="caseNumber" placeholder="e.g., 2025-CV-1234">
+                    <div class="form-text">Enter the court-assigned case number if available.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="caseType" class="form-label">Case Type <span class="text-danger">*</span></label>
+                    <select class="form-select" id="caseType" required>
+                      <option value="">Select Case Type</option>
+                      <option value="personal_injury">Personal Injury</option>
+                      <option value="medical_malpractice">Medical Malpractice</option>
+                      <option value="contract">Contract</option>
+                      <option value="employment">Employment</option>
+                      <option value="intellectual_property">Intellectual Property</option>
+                      <option value="family">Family Law</option>
+                      <option value="criminal">Criminal</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="caseStatus" class="form-label">Status <span class="text-danger">*</span></label>
+                    <select class="form-select" id="caseStatus" required>
+                      <option value="active">Active</option>
+                      <option value="pending">Pending</option>
+                      <option value="closed">Closed</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="caseDescription" class="form-label">Description</label>
+                    <textarea class="form-control" id="caseDescription" rows="4" placeholder="Brief description of the case..."></textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h4>Court Information</h4>
+                  <hr>
+                  <div class="mb-3">
+                    <label for="courtName" class="form-label">Court Name</label>
+                    <input type="text" class="form-control" id="courtName" placeholder="e.g., Superior Court of California">
+                  </div>
+                  <div class="mb-3">
+                    <label for="jurisdiction" class="form-label">Jurisdiction</label>
+                    <input type="text" class="form-control" id="jurisdiction" placeholder="e.g., County of Los Angeles">
+                  </div>
+                  <div class="mb-3">
+                    <label for="judge" class="form-label">Judge</label>
+                    <input type="text" class="form-control" id="judge" placeholder="e.g., Hon. Jane Smith">
+                  </div>
+                  <div class="mb-3">
+                    <label for="filingDate" class="form-label">Filing Date</label>
+                    <input type="date" class="form-control" id="filingDate">
+                  </div>
+                  <div class="mb-3">
+                    <label for="trialDate" class="form-label">Trial Date (if scheduled)</label>
+                    <input type="date" class="form-control" id="trialDate">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col-12">
+                  <h4>Parties</h4>
+                  <hr>
+                </div>
+                <div class="col-md-6">
+                  <h5>Plaintiff/Petitioner</h5>
+                  <div class="mb-3">
+                    <label for="plaintiffName" class="form-label">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="plaintiffName" required placeholder="e.g., John Smith">
+                  </div>
+                  <div class="mb-3">
+                    <label for="plaintiffAttorney" class="form-label">Attorney</label>
+                    <input type="text" class="form-control" id="plaintiffAttorney" placeholder="e.g., Jane Doe">
+                  </div>
+                  <div class="mb-3">
+                    <label for="plaintiffContact" class="form-label">Contact Information</label>
+                    <textarea class="form-control" id="plaintiffContact" rows="3" placeholder="Address, phone, email..."></textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h5>Defendant/Respondent</h5>
+                  <div class="mb-3">
+                    <label for="defendantName" class="form-label">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="defendantName" required placeholder="e.g., ABC Corporation">
+                  </div>
+                  <div class="mb-3">
+                    <label for="defendantAttorney" class="form-label">Attorney</label>
+                    <input type="text" class="form-control" id="defendantAttorney" placeholder="e.g., Robert Johnson">
+                  </div>
+                  <div class="mb-3">
+                    <label for="defendantContact" class="form-label">Contact Information</label>
+                    <textarea class="form-control" id="defendantContact" rows="3" placeholder="Address, phone, email..."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col-12">
+                  <h4>Document Organization</h4>
+                  <hr>
+                  <div class="mb-3">
+                    <label class="form-label">Bates Numbering Prefix <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="batesPrefix" required placeholder="e.g., SMITH">
+                      <span class="input-group-text">-</span>
+                      <input type="number" class="form-control" id="batesStartNumber" value="1" min="1">
+                    </div>
+                    <div class="form-text">This prefix will be used for all documents in this case. Example: SMITH-000001</div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Default Document Categories</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="pleadings" id="categoryPleadings" checked>
+                      <label class="form-check-label" for="categoryPleadings">
+                        Pleadings
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="discovery" id="categoryDiscovery" checked>
+                      <label class="form-check-label" for="categoryDiscovery">
+                        Discovery
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="correspondence" id="categoryCorrespondence" checked>
+                      <label class="form-check-label" for="categoryCorrespondence">
+                        Correspondence
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="medical_records" id="categoryMedical">
+                      <label class="form-check-label" for="categoryMedical">
+                        Medical Records
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="expert_reports" id="categoryExpert">
+                      <label class="form-check-label" for="categoryExpert">
+                        Expert Reports
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='/cases.html'">
+                      <i class="bi bi-arrow-left"></i> Cancel
+                    </button>
+                    <div>
+                      <button type="button" class="btn btn-outline-primary me-2" id="saveAsDraft">
+                        <i class="bi bi-save"></i> Save as Draft
+                      </button>
+                      <button type="submit" class="btn btn-primary" id="createCase">
+                        <i class="bi bi-plus-circle"></i> Create Case
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Form submission
+      $('#newCaseForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate form
+        if (!validateForm()) {
+          return false;
+        }
+        
+        // Show loading state
+        showSpinner('Creating case...');
+        
+        // Simulate API call
+        setTimeout(() => {
+          hideSpinner();
+          showAlert('Case created successfully!', 'success');
+          
+          // Redirect after a short delay
+          setTimeout(() => {
+            window.location.href = '/cases.html';
+          }, 1500);
+        }, 1000);
+      });
+      
+      // Save as draft
+      $('#saveAsDraft').click(function() {
+        showSpinner('Saving draft...');
+        
+        setTimeout(() => {
+          hideSpinner();
+          showAlert('Case draft saved successfully!', 'success');
+        }, 800);
+      });
+    });
+    
+    function validateForm() {
+      let isValid = true;
+      const requiredFields = ['caseName', 'caseType', 'caseStatus', 'plaintiffName', 'defendantName', 'batesPrefix'];
+      
+      requiredFields.forEach(field => {
+        const $field = $('#' + field);
+        if (!$field.val()) {
+          $field.addClass('is-invalid');
+          isValid = false;
+        } else {
+          $field.removeClass('is-invalid');
+        }
+      });
+      
+      if (!isValid) {
+        showAlert('Please fill in all required fields.', 'danger');
+      }
+      
+      return isValid;
+    }
+    
+    function showSpinner(message) {
+      // Implementation would be in main.js
+      console.log('Showing spinner: ' + message);
+    }
+    
+    function hideSpinner() {
+      // Implementation would be in main.js
+      console.log('Hiding spinner');
+    }
+    
+    function showAlert(message, type) {
+      const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      
+      $('#alertContainer').html(alertHtml);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        $('.alert').alert('close');
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

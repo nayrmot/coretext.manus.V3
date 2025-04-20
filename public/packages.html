@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exhibit Packages - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent.html">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories.html">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases.html">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new.html">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry.html">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse show list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits.html">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li class="active">
+              <a href="/exhibits/packages.html">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages.html">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring.html">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser.html">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings.html">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          
+          <!-- Global Case Selector -->
+          <div class="case-selector-container ms-3">
+            <select id="globalCaseSelector" class="form-select form-select-sm">
+              <option value="all">All Cases</option>
+              <option value="1">Smith v. Johnson</option>
+              <option value="2">Williams v. City Hospital</option>
+              <option value="3">Brown v. Insurance Co.</option>
+            </select>
+          </div>
+
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout.html">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2 data-base-title="Exhibit Packages">Exhibit Packages</h2>
+            <p class="text-muted">Create and manage packages of exhibits for production, trial, or other purposes.</p>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-8">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search packages..." id="searchPackages">
+              <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4 text-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPackageModal">
+              <i class="bi bi-plus-circle"></i> Create Package
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Package Cards -->
+          <div class="col-md-4 mb-4">
+            <div class="card h-100" data-case-id="1">
+              <div class="card-header bg-primary text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-title mb-0">Trial Exhibits</h5>
+                  <span class="badge bg-light text-dark">12 Exhibits</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Smith v. Johnson</h6>
+                <p class="card-text">Primary exhibit package for trial presentation, including all key documents and evidence.</p>
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Complete</div>
+                </div>
+                <p class="small text-muted mb-0">
+                  <i class="bi bi-calendar-event"></i> Created: Apr 15, 2025<br>
+                  <i class="bi bi-person"></i> Owner: John Doe
+                </p>
+              </div>
+              <div class="card-footer">
+                <div class="btn-group w-100" role="group">
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewPackageModal" data-package-id="1">
+                    <i class="bi bi-eye"></i> View
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exportPackageModal" data-package-id="1">
+                    <i class="bi bi-download"></i> Export
+                  </button>
+                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deletePackageModal" data-package-id="1">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="card h-100" data-case-id="2">
+              <div class="card-header bg-info text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-title mb-0">Expert Disclosures</h5>
+                  <span class="badge bg-light text-dark">8 Exhibits</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Williams v. City Hospital</h6>
+                <p class="card-text">Expert witness disclosure package including reports, supporting documents, and CV materials.</p>
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">In Progress</div>
+                </div>
+                <p class="small text-muted mb-0">
+                  <i class="bi bi-calendar-event"></i> Created: Apr 10, 2025<br>
+                  <i class="bi bi-person"></i> Owner: Jane Smith
+                </p>
+              </div>
+              <div class="card-footer">
+                <div class="btn-group w-100" role="group">
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewPackageModal" data-package-id="2">
+                    <i class="bi bi-eye"></i> View
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exportPackageModal" data-package-id="2">
+                    <i class="bi bi-download"></i> Export
+                  </button>
+                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deletePackageModal" data-package-id="2">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="card h-100" data-case-id="3">
+              <div class="card-header bg-secondary text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-title mb-0">Deposition Exhibits</h5>
+                  <span class="badge bg-light text-dark">5 Exhibits</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Brown v. Insurance Co.</h6>
+                <p class="card-text">Exhibits prepared for upcoming depositions of key witnesses and corporate representatives.</p>
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">In Progress</div>
+                </div>
+                <p class="small text-muted mb-0">
+                  <i class="bi bi-calendar-event"></i> Created: Apr 5, 2025<br>
+                  <i class="bi bi-person"></i> Owner: John Doe
+                </p>
+              </div>
+              <div class="card-footer">
+                <div class="btn-group w-100" role="group">
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewPackageModal" data-package-id="3">
+                    <i class="bi bi-eye"></i> View
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exportPackageModal" data-package-id="3">
+                    <i class="bi bi-download"></i> Export
+                  </button>
+                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deletePackageModal" data-package-id="3">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="card h-100" data-case-id="1">
+              <div class="card-header bg-success text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-title mb-0">Settlement Conference</h5>
+                  <span class="badge bg-light text-dark">7 Exhibits</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Smith v. Johnson</h6>
+                <p class="card-text">Key exhibits for upcoming settlement conference with mediator, including damages calculation.</p>
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Complete</div>
+                </div>
+                <p class="small text-muted mb-0">
+                  <i class="bi bi-calendar-event"></i> Created: Apr 3, 2025<br>
+                  <i class="bi bi-person"></i> Owner: Jane Smith
+                </p>
+              </div>
+              <div class="card-footer">
+                <div class="btn-group w-100" role="group">
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewPackageModal" data-package-id="4">
+                    <i class="bi bi-eye"></i> View
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exportPackageModal" data-package-id="4">
+                    <i class="bi bi-download"></i> Export
+                  </button>
+                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deletePackageModal" data-package-id="4">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="card h-100" data-case-id="2">
+              <div class="card-header bg-warning text-dark">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-title mb-0">Medical Timeline</h5>
+                  <span class="badge bg-light text-dark">15 Exhibits</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Williams v. City Hospital</h6>
+                <p class="card-text">Chronological collection of medical records and treatment documentation for case timeline.</p>
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">In Progress</div>
+                </div>
+                <p class="small text-muted mb-0">
+                  <i class="bi bi-calendar-event"></i> Created: Mar 28, 2025<br>
+                  <i class="bi bi-person"></i> Owner: John Doe
+                </p>
+              </div>
+              <div class="card-footer">
+                <div class="btn-group w-100" role="group">
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewPackageModal" data-package-id="5">
+                    <i class="bi bi-eye"></i> View
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exportPackageModal" data-package-id="5">
+                    <i class="bi bi-download"></i> Export
+                  </button>
+                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deletePackageModal" data-package-id="5">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="card h-100" data-case-id="3">
+              <div class="card-header bg-danger text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-title mb-0">Policy Exclusions</h5>
+                  <span class="badge bg-light text-dark">3 Exhibits</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Brown v. Insurance Co.</h6>
+                <p class="card-text">Insurance policy documents highlighting exclusion clauses relevant to coverage dispute.</p>
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Complete</div>
+                </div>
+                <p class="small text-muted mb-0">
+                  <i class="bi bi-calendar-event"></i> Created: Mar 20, 2025<br>
+                  <i class="bi bi-person"></i> Owner: Jane Smith
+                </p>
+              </div>
+              <div class="card-footer">
+                <div class="btn-group w-100" role="group">
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewPackageModal" data-package-id="6">
+                    <i class="bi bi-eye"></i> View
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exportPackageModal" data-package-id="6">
+                    <i class="bi bi-download"></i> Export
+                  </button>
+                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deletePackageModal" data-package-id="6">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Package Modal -->
+  <div class="modal fade" id="createPackageModal" tabindex="-1" aria-labelledby="createPackageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createPackageModalLabel">Create New Exhibit Package</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="createPackageForm">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="packageName" class="form-label">Package Name</label>
+                <input type="text" class="form-control" id="packageName" placeholder="Enter package name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="packageCase" class="form-label">Case</label>
+                <select class="form-select" id="packageCase" required>
+                  <option value="">Select a case</option>
+                  <option value="1">Smith v. Johnson</option>
+                  <option value="2">Williams v. City Hospital</option>
+                  <option value="3">Brown v. Insurance Co.</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="packageDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="packageDescription" rows="3" placeholder="Enter package description"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="packageColor" class="form-label">Color</label>
+              <select class="form-select" id="packageColor">
+                <option value="primary">Blue</option>
+                <option value="success">Green</option>
+                <option value="danger">Red</option>
+                <option value="warning">Yellow</option>
+                <option value="info">Light Blue</option>
+                <option value="secondary">Gray</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Add Exhibits</label>
+              <div class="card">
+                <div class="card-body">
+                  <div class="mb-3">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Search for exhibits to add..." id="searchExhibitsToAdd">
+                      <button class="btn btn-outline-secondary" type="button" id="searchExhibitsButton">
+                        <i class="bi bi-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-sm table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="selectAllExhibitsToAdd">
+                              <label class="form-check-label" for="selectAllExhibitsToAdd"></label>
+                            </div>
+                          </th>
+                          <th scope="col">Exhibit #</th>
+                          <th scope="col">Title</th>
+                          <th scope="col">Type</th>
+                          <th scope="col">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div class="form-check">
+                              <input class="form-check-input exhibit-to-add-checkbox" type="checkbox" id="exhibitToAdd1">
+                              <label class="form-check-label" for="exhibitToAdd1"></label>
+                            </div>
+                          </td>
+                          <td>Exhibit A</td>
+                          <td>Contract Agreement</td>
+                          <td><span class="badge bg-primary">Document</span></td>
+                          <td>Apr 15, 2025</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check">
+                              <input class="form-check-input exhibit-to-add-checkbox" type="checkbox" id="exhibitToAdd2">
+                              <label class="form-check-label" for="exhibitToAdd2"></label>
+                            </div>
+                          </td>
+                          <td>Exhibit B</td>
+                          <td>Accident Scene Photo</td>
+                          <td><span class="badge bg-info">Image</span></td>
+                          <td>Apr 12, 2025</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check">
+                              <input class="form-check-input exhibit-to-add-checkbox" type="checkbox" id="exhibitToAdd3">
+                              <label class="form-check-label" for="exhibitToAdd3"></label>
+                            </div>
+                          </td>
+                          <td>Exhibit 1</td>
+                          <td>Medical Records</td>
+                          <td><span class="badge bg-primary">Document</span></td>
+                          <td>Apr 10, 2025</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check">
+                              <input class="form-check-input exhibit-to-add-checkbox" type="checkbox" id="exhibitToAdd4">
+                              <label class="form-check-label" for="exhibitToAdd4"></label>
+                            </div>
+                          </td>
+                          <td>Exhibit 2</td>
+                          <td>Expert Report</td>
+                          <td><span class="badge bg-primary">Document</span></td>
+                          <td>Apr 8, 2025</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-check">
+                              <input class="form-check-input exhibit-to-add-checkbox" type="checkbox" id="exhibitToAdd5">
+                              <label class="form-check-label" for="exhibitToAdd5"></label>
+                            </div>
+                          </td>
+                          <td>Exhibit A</td>
+                          <td>Deposition Video</td>
+                          <td><span class="badge bg-danger">Video</span></td>
+                          <td>Apr 5, 2025</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center mt-2">
+                    <span class="text-muted small">Showing 5 of 50 exhibits</span>
+                    <button type="button" class="btn btn-sm btn-outline-primary" id="addSelectedExhibits">
+                      <i class="bi bi-plus-circle"></i> Add Selected
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Selected Exhibits</label>
+              <div class="card">
+                <div class="card-body">
+                  <div id="selectedExhibitsList" class="list-group">
+                    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                      <span class="text-muted">No exhibits selected</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="savePackage">Create Package</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Package Modal -->
+  <div class="modal fade" id="viewPackageModal" tabindex="-1" aria-labelledby="viewPackageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewPackageModalLabel">Trial Exhibits</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <h6>Case</h6>
+              <p>Smith v. Johnson</p>
+            </div>
+            <div class="col-md-6">
+              <h6>Status</h6>
+              <span class="badge bg-success">Complete</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <h6>Description</h6>
+            <p>Primary exhibit package for trial presentation, including all key documents and evidence.</p>
+          </div>
+          <div class="mb-3">
+            <h6>Exhibits</h6>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Exhibit #</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Exhibit 1</td>
+                    <td>Contract Agreement</td>
+                    <td><span class="badge bg-primary">Document</span></td>
+                    <td>Apr 15, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Remove">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Exhibit 2</td>
+                    <td>Accident Scene Photo</td>
+                    <td><span class="badge bg-info">Image</span></td>
+                    <td>Apr 15, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Remove">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Exhibit 3</td>
+                    <td>Email Correspondence</td>
+                    <td><span class="badge bg-primary">Document</span></td>
+                    <td>Apr 15, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Remove">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Exhibit 4</td>
+                    <td>Witness Statement</td>
+                    <td><span class="badge bg-primary">Document</span></td>
+                    <td>Apr 15, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Remove">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="mb-3">
+            <h6>Package History</h6>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <span class="fw-bold">Package created</span>
+                  <br>
+                  <small class="text-muted">By John Doe</small>
+                </div>
+                <span class="text-muted">Apr 15, 2025</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <span class="fw-bold">Added 8 exhibits</span>
+                  <br>
+                  <small class="text-muted">By John Doe</small>
+                </div>
+                <span class="text-muted">Apr 15, 2025</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <span class="fw-bold">Added 4 exhibits</span>
+                  <br>
+                  <small class="text-muted">By Jane Smith</small>
+                </div>
+                <span class="text-muted">Apr 16, 2025</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <span class="fw-bold">Marked as complete</span>
+                  <br>
+                  <small class="text-muted">By John Doe</small>
+                </div>
+                <span class="text-muted">Apr 17, 2025</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportPackageModal">
+            <i class="bi bi-download"></i> Export Package
+          </button>
+          <button type="button" class="btn btn-outline-primary">
+            <i class="bi bi-pencil"></i> Edit Package
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Package Modal -->
+  <div class="modal fade" id="exportPackageModal" tabindex="-1" aria-labelledby="exportPackageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exportPackageModalLabel">Export Package</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exportFormat" class="form-label">Export Format</label>
+            <select class="form-select" id="exportFormat">
+              <option value="pdf">PDF</option>
+              <option value="zip">ZIP Archive</option>
+              <option value="excel">Excel Index</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="exportOptions" class="form-label">Export Options</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="includeIndex" checked>
+              <label class="form-check-label" for="includeIndex">
+                Include Exhibit Index
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="includeCoverPage" checked>
+              <label class="form-check-label" for="includeCoverPage">
+                Include Cover Page
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="includeExhibitStickers" checked>
+              <label class="form-check-label" for="includeExhibitStickers">
+                Include Exhibit Stickers
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="includeBatesNumbers">
+              <label class="form-check-label" for="includeBatesNumbers">
+                Include Bates Numbers
+              </label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exportNaming" class="form-label">File Naming</label>
+            <select class="form-select" id="exportNaming">
+              <option value="exhibit_number">Exhibit Number (e.g., Exhibit_1.pdf)</option>
+              <option value="exhibit_title">Exhibit Title (e.g., Contract_Agreement.pdf)</option>
+              <option value="both">Both (e.g., Exhibit_1_Contract_Agreement.pdf)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="confirmExport">Export</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Package Modal -->
+  <div class="modal fade" id="deletePackageModal" tabindex="-1" aria-labelledby="deletePackageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deletePackageModalLabel">Confirm Deletion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this exhibit package? This action cannot be undone.</p>
+          <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle-fill"></i> Warning: Deleting this package will remove all package information and organization. The individual exhibits will not be deleted.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDelete">Delete Package</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Initialize tooltips
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      });
+      
+      // Search packages
+      $('#searchButton').click(function() {
+        const searchTerm = $('#searchPackages').val().toLowerCase();
+        if (searchTerm.length > 0) {
+          $('.card').hide();
+          $('.card').each(function() {
+            const text = $(this).text().toLowerCase();
+            if (text.indexOf(searchTerm) > -1) {
+              $(this).show();
+            }
+          });
+          
+          const visibleCards = $('.card:visible').length;
+          showAlert(`Found ${visibleCards} packages matching "${searchTerm}".`, 'info');
+        } else {
+          $('.card').show();
+        }
+      });
+      
+      // Enter key in search box
+      $('#searchPackages').keypress(function(e) {
+        if (e.which === 13) {
+          $('#searchButton').click();
+          return false;
+        }
+      });
+      
+      // Select all exhibits to add
+      $('#selectAllExhibitsToAdd').change(function() {
+        $('.exhibit-to-add-checkbox').prop('checked', $(this).prop('checked'));
+      });
+      
+      // Check if all checkboxes are selected
+      $('.exhibit-to-add-checkbox').change(function() {
+        if ($('.exhibit-to-add-checkbox:checked').length === $('.exhibit-to-add-checkbox').length) {
+          $('#selectAllExhibitsToAdd').prop('checked', true);
+        } else {
+          $('#selectAllExhibitsToAdd').prop('checked', false);
+        }
+      });
+      
+      // Add selected exhibits
+      $('#addSelectedExhibits').click(function() {
+        const selectedCount = $('.exhibit-to-add-checkbox:checked').length;
+        
+        if (selectedCount > 0) {
+          // Clear the "No exhibits selected" message
+          $('#selectedExhibitsList').empty();
+          
+          // Add each selected exhibit to the list
+          $('.exhibit-to-add-checkbox:checked').each(function() {
+            const row = $(this).closest('tr');
+            const exhibitNumber = row.find('td:nth-child(2)').text();
+            const exhibitTitle = row.find('td:nth-child(3)').text();
+            const exhibitType = row.find('td:nth-child(4)').html();
+            
+            const listItem = `
+              <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>${exhibitNumber}</strong> - ${exhibitTitle}
+                  <br>
+                  ${exhibitType}
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger remove-exhibit">
+                  <i class="bi bi-x-circle"></i>
+                </button>
+              </div>
+            `;
+            
+            $('#selectedExhibitsList').append(listItem);
+          });
+          
+          // Uncheck all checkboxes
+          $('.exhibit-to-add-checkbox, #selectAllExhibitsToAdd').prop('checked', false);
+          
+          showAlert(`${selectedCount} exhibits added to package.`, 'success');
+        } else {
+          showAlert('Please select at least one exhibit to add.', 'warning');
+        }
+      });
+      
+      // Remove exhibit from selected list
+      $(document).on('click', '.remove-exhibit', function() {
+        $(this).closest('.list-group-item').remove();
+        
+        // If no exhibits are left, show the "No exhibits selected" message
+        if ($('#selectedExhibitsList').children().length === 0) {
+          $('#selectedExhibitsList').html(`
+            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span class="text-muted">No exhibits selected</span>
+            </div>
+          `);
+        }
+      });
+      
+      // Save package
+      $('#savePackage').click(function() {
+        const packageName = $('#packageName').val();
+        const packageCase = $('#packageCase').val();
+        
+        if (!packageName) {
+          showAlert('Please enter a package name.', 'warning');
+          return;
+        }
+        
+        if (!packageCase) {
+          showAlert('Please select a case.', 'warning');
+          return;
+        }
+        
+        // Check if any exhibits are selected
+        if ($('#selectedExhibitsList').children().length === 0 || $('#selectedExhibitsList').text().includes('No exhibits selected')) {
+          showAlert('Please add at least one exhibit to the package.', 'warning');
+          return;
+        }
+        
+        // Create package
+        showAlert(`Creating package "${packageName}"...`, 'info');
+        
+        // Close modal and show success message
+        $('#createPackageModal').modal('hide');
+        setTimeout(() => {
+          showAlert(`Package "${packageName}" created successfully.`, 'success');
+          
+          // In a real application, we would reload the page or add the new package to the list
+          // For this demo, we'll just reload the page after a delay
+          setTimeout(() => {
+            // location.reload();
+            showAlert('New package added to the list.', 'success');
+          }, 1000);
+        }, 1000);
+      });
+      
+      // Confirm export
+      $('#confirmExport').click(function() {
+        const format = $('#exportFormat').val();
+        
+        showAlert(`Exporting package as ${format.toUpperCase()}...`, 'info');
+        
+        // Close modal and show success message
+        $('#exportPackageModal').modal('hide');
+        setTimeout(() => {
+          showAlert('Export completed successfully. Download starting...', 'success');
+        }, 1000);
+      });
+      
+      // Confirm delete
+      $('#confirmDelete').click(function() {
+        showAlert('Deleting package...', 'info');
+        
+        // Close modal and show success message
+        $('#deletePackageModal').modal('hide');
+        setTimeout(() => {
+          showAlert('Package deleted successfully.', 'success');
+          
+          // In a real application, we would remove the deleted package from the DOM
+          // For this demo, we'll just reload the page after a delay
+          setTimeout(() => {
+            // location.reload();
+            showAlert('Package removed from the list.', 'success');
+          }, 1000);
+        }, 1000);
+      });
+      
+      // Global case selector
+      $('#globalCaseSelector').change(function() {
+        const selectedCase = $(this).val();
+        
+        if (selectedCase === 'all') {
+          $('.card').show();
+          showAlert('Showing packages for all cases.', 'info');
+        } else {
+          $('.card').hide();
+          $(`.card[data-case-id="${selectedCase}"]`).show();
+          
+          const visibleCards = $('.card:visible').length;
+          const caseName = $('#globalCaseSelector option:selected').text();
+          showAlert(`Showing ${visibleCards} packages for ${caseName}.`, 'info');
+        }
+      });
+    });
+    
+    function showAlert(message, type) {
+      const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      
+      $('#alertContainer').html(alertHtml);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        $('.alert').alert('close');
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

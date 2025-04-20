@@ -1,0 +1,17 @@
+# Node.js / JS artifacts
+node_modules/
+dist/
+
+# Conda / Python artifacts
+__pycache__/
+*.py[cod]
+env/
+*.env
+*.log
+
+# IDE / OS files
+.vscode/
+.DS_Store
+
+# local MongoDB data
+data/db/

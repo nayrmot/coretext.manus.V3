@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bates Registry - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent.html">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories.html">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases.html">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new.html">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse show list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li class="active">
+              <a href="/bates/registry.html">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits.html">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages.html">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages.html">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring.html">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser.html">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings.html">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          
+          <!-- Global Case Selector -->
+          <div class="case-selector-container ms-3">
+            <select id="globalCaseSelector" class="form-select form-select-sm">
+              <option value="all">All Cases</option>
+              <option value="1">Smith v. Johnson</option>
+              <option value="2">Williams v. City Hospital</option>
+              <option value="3">Brown v. Insurance Co.</option>
+            </select>
+          </div>
+
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout.html">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2 data-base-title="Bates Registry">Bates Registry</h2>
+            <p class="text-muted">Track and manage Bates numbers assigned to documents.</p>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-8">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search Bates numbers..." id="searchBates">
+              <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4 text-end">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
+              <i class="bi bi-download"></i> Export Registry
+            </button>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <div class="row align-items-center">
+              <div class="col">
+                <h5 class="card-title mb-0">Registry Filters</h5>
+              </div>
+              <div class="col-auto">
+                <button class="btn btn-sm btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
+                  <i class="bi bi-funnel"></i> Show Filters
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="collapse" id="filterCollapse">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <label for="filterCase" class="form-label">Case</label>
+                  <select class="form-select" id="filterCase">
+                    <option value="">All Cases</option>
+                    <option value="1">Smith v. Johnson</option>
+                    <option value="2">Williams v. City Hospital</option>
+                    <option value="3">Brown v. Insurance Co.</option>
+                  </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="filterConfig" class="form-label">Configuration</label>
+                  <select class="form-select" id="filterConfig">
+                    <option value="">All Configurations</option>
+                    <option value="1">Smith Case Primary</option>
+                    <option value="2">Williams Medical Records</option>
+                    <option value="3">Brown Insurance Docs</option>
+                    <option value="4">Williams Correspondence</option>
+                  </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="filterStatus" class="form-label">Status</label>
+                  <select class="form-select" id="filterStatus">
+                    <option value="">All Statuses</option>
+                    <option value="active">Active</option>
+                    <option value="reserved">Reserved</option>
+                    <option value="released">Released</option>
+                  </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="filterDate" class="form-label">Date Range</label>
+                  <select class="form-select" id="filterDate">
+                    <option value="">Any Time</option>
+                    <option value="today">Today</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="custom">Custom Range</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" id="customDateRange" style="display: none;">
+                <div class="col-md-3 mb-3">
+                  <label for="filterDateFrom" class="form-label">From</label>
+                  <input type="date" class="form-control" id="filterDateFrom">
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="filterDateTo" class="form-label">To</label>
+                  <input type="date" class="form-control" id="filterDateTo">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <button type="button" class="btn btn-primary" id="applyFilters">Apply Filters</button>
+                  <button type="button" class="btn btn-outline-secondary" id="resetFilters">Reset</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="selectAllBates">
+                        <label class="form-check-label" for="selectAllBates"></label>
+                      </div>
+                    </th>
+                    <th scope="col">Bates Number</th>
+                    <th scope="col">Document</th>
+                    <th scope="col">Configuration</th>
+                    <th scope="col">Case</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Assigned Date</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-case-id="1" data-config-id="1" data-status="active">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input bates-checkbox" type="checkbox" id="bates1">
+                        <label class="form-check-label" for="bates1"></label>
+                      </div>
+                    </td>
+                    <td>SMITH-000001</td>
+                    <td>Complaint.pdf</td>
+                    <td>Smith Case Primary</td>
+                    <td>Smith v. Johnson</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>Apr 16, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View Document">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Release Number">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-case-id="1" data-config-id="1" data-status="active">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input bates-checkbox" type="checkbox" id="bates2">
+                        <label class="form-check-label" for="bates2"></label>
+                      </div>
+                    </td>
+                    <td>SMITH-000002</td>
+                    <td>Contract_Agreement.pdf</td>
+                    <td>Smith Case Primary</td>
+                    <td>Smith v. Johnson</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>Apr 16, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View Document">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Release Number">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-case-id="1" data-config-id="1" data-status="active">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input bates-checkbox" type="checkbox" id="bates3">
+                        <label class="form-check-label" for="bates3"></label>
+                      </div>
+                    </td>
+                    <td>SMITH-000003</td>
+                    <td>Email_Correspondence.pdf</td>
+                    <td>Smith Case Primary</td>
+                    <td>Smith v. Johnson</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>Apr 15, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View Document">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Release Number">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-case-id="2" data-config-id="2" data-status="active">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input bates-checkbox" type="checkbox" id="bates4">
+                        <label class="form-check-label" for="bates4"></label>
+                      </div>
+                    </td>
+                    <td>WILL-MED-0001</td>
+                    <td>Medical_Records_2023.pdf</td>
+                    <td>Williams Medical Records</td>
+                    <td>Williams v. City Hospital</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>Apr 14, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View Document">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Release Number">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-case-id="2" data-config-id="2" data-status="active">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input bates-checkbox" type="checkbox" id="bates5">
+                        <label class="form-check-label" for="bates5"></label>
+                      </div>
+                    </td>
+                    <td>WILL-MED-0002</td>
+                    <td>Lab_Results.pdf</td>
+                    <td>Williams Medical Records</td>
+                    <td>Williams v. City Hospital</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>Apr 14, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View Document">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Release Number">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-case-id="3" data-config-id="3" data-status="active">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input bates-checkbox" type="checkbox" id="bates6">
+                        <label class="form-check-label" for="bates6"></label>
+                      </div>
+                    </td>
+                    <td>BROWN-00001</td>
+                    <td>Insurance_Policy.pdf</td>
+                    <td>Brown Insurance Docs</td>
+                    <td>Brown v. Insurance Co.</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>Apr 10, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="View Document">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Release Number">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-case-id="1" data-config-id="1" data-status="reserved">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input bates-checkbox" type="checkbox" id="bates7">
+                        <label class="form-check-label" for="bates7"></label>
+                      </div>
+                    </td>
+                    <td>SMITH-000004</td>
+                    <td><em>Reserved</em></td>
+                    <td>Smith Case Primary</td>
+                    <td>Smith v. Johnson</td>
+                    <td><span class="badge bg-warning">Reserved</span></td>
+                    <td>Apr 17, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Assign to Document">
+                          <i class="bi bi-link"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Release Number">
+                          <i class="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-case-id="1" data-config-id="1" data-status="released">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input bates-checkbox" type="checkbox" id="bates8">
+                        <label class="form-check-label" for="bates8"></label>
+                      </div>
+                    </td>
+                    <td>SMITH-000005</td>
+                    <td><em>Released</em></td>
+                    <td>Smith Case Primary</td>
+                    <td>Smith v. Johnson</td>
+                    <td><span class="badge bg-secondary">Released</span></td>
+                    <td>Apr 14, 2025</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Reassign">
+                          <i class="bi bi-arrow-repeat"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Bulk Actions
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" id="bulkReserve">Reserve Numbers</a></li>
+                    <li><a class="dropdown-item" href="#" id="bulkRelease">Release Numbers</a></li>
+                    <li><a class="dropdown-item" href="#" id="bulkExport">Export Selected</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <nav aria-label="Bates registry pagination">
+                  <ul class="pagination justify-content-end">
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Modal -->
+  <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exportModalLabel">Export Bates Registry</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exportFormat" class="form-label">Export Format</label>
+            <select class="form-select" id="exportFormat">
+              <option value="csv">CSV</option>
+              <option value="excel">Excel</option>
+              <option value="pdf">PDF</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="exportScope" class="form-label">Export Scope</label>
+            <select class="form-select" id="exportScope">
+              <option value="all">All Bates Numbers</option>
+              <option value="filtered">Filtered Results</option>
+              <option value="selected">Selected Bates Numbers</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="exportOptions" class="form-label">Export Options</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="includeHeaders" checked>
+              <label class="form-check-label" for="includeHeaders">
+                Include Column Headers
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="includeDocumentLinks">
+              <label class="form-check-label" for="includeDocumentLinks">
+                Include Document Links
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="includeTimestamps" checked>
+              <label class="form-check-label" for="includeTimestamps">
+                Include Timestamps
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="confirmExport">Export</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reserve Numbers Modal -->
+  <div class="modal fade" id="reserveModal" tabindex="-1" aria-labelledby="reserveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reserveModalLabel">Reserve Bates Numbers</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="reserveConfig" class="form-label">Bates Configuration</label>
+            <select class="form-select" id="reserveConfig">
+              <option value="1">Smith Case Primary (SMITH-######)</option>
+              <option value="2">Williams Medical Records (WILL-MED-####)</option>
+              <option value="3">Brown Insurance Docs (BROWN-#####)</option>
+              <option value="4">Williams Correspondence (WILL-CORR-###)</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="reserveCount" class="form-label">Number of Bates Numbers to Reserve</label>
+            <input type="number" class="form-control" id="reserveCount" min="1" max="1000" value="10">
+            <div class="form-text">You can reserve up to 1,000 numbers at once.</div>
+          </div>
+          <div class="mb-3">
+            <label for="reserveReason" class="form-label">Reason (Optional)</label>
+            <input type="text" class="form-control" id="reserveReason" placeholder="e.g., For upcoming document production">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="confirmReserve">Reserve Numbers</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Release Confirmation Modal -->
+  <div class="modal fade" id="releaseConfirmModal" tabindex="-1" aria-labelledby="releaseConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="releaseConfirmModalLabel">Confirm Release</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to release the selected Bates numbers? This action will remove the association between the Bates numbers and their documents.</p>
+          <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle-fill"></i> Warning: Released Bates numbers will not be automatically reassigned to maintain the integrity of the numbering sequence.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmRelease">Release Numbers</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Initialize tooltips
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      });
+      
+      // Select all checkbox
+      $('#selectAllBates').change(function() {
+        $('.bates-checkbox').prop('checked', $(this).prop('checked'));
+      });
+      
+      // Check if all checkboxes are selected
+      $('.bates-checkbox').change(function() {
+        if ($('.bates-checkbox:checked').length === $('.bates-checkbox').length) {
+          $('#selectAllBates').prop('checked', true);
+        } else {
+          $('#selectAllBates').prop('checked', false);
+        }
+      });
+      
+      // Show custom date range when "Custom Range" is selected
+      $('#filterDate').change(function() {
+        if ($(this).val() === 'custom') {
+          $('#customDateRange').show();
+        } else {
+          $('#customDateRange').hide();
+        }
+      });
+      
+      // Reset filters
+      $('#resetFilters').click(function() {
+        $('#filterCase, #filterConfig, #filterStatus, #filterDate').val('');
+        $('#filterDateFrom, #filterDateTo').val('');
+        $('#customDateRange').hide();
+      });
+      
+      // Apply filters
+      $('#applyFilters').click(function() {
+        const caseFilter = $('#filterCase').val();
+        const configFilter = $('#filterConfig').val();
+        const statusFilter = $('#filterStatus').val();
+        
+        // Show all rows first
+        $('tbody tr').show();
+        
+        // Apply case filter
+        if (caseFilter) {
+          $('tbody tr').not(`[data-case-id="${caseFilter}"]`).hide();
+        }
+        
+        // Apply config filter
+        if (configFilter) {
+          $('tbody tr:visible').not(`[data-config-id="${configFilter}"]`).hide();
+        }
+        
+        // Apply status filter
+        if (statusFilter) {
+          $('tbody tr:visible').not(`[data-status="${statusFilter}"]`).hide();
+        }
+        
+        // Date filtering would be implemented with actual dates
+        
+        // Show filter results message
+        const visibleRows = $('tbody tr:visible').length;
+        showAlert(`Showing ${visibleRows} Bates numbers matching your filters.`, 'info');
+      });
+      
+      // Search functionality
+      $('#searchButton').click(function() {
+        const searchTerm = $('#searchBates').val().toLowerCase();
+        if (searchTerm.length > 0) {
+          $('tbody tr').hide();
+          $('tbody tr').each(function() {
+            const text = $(this).text().toLowerCase();
+            if (text.indexOf(searchTerm) > -1) {
+              $(this).show();
+            }
+          });
+          
+          const visibleRows = $('tbody tr:visible').length;
+          showAlert(`Found ${visibleRows} Bates numbers matching "${searchTerm}".`, 'info');
+        } else {
+          $('tbody tr').show();
+        }
+      });
+      
+      // Enter key in search box
+      $('#searchBates').keypress(function(e) {
+        if (e.which === 13) {
+          $('#searchButton').click();
+          return false;
+        }
+      });
+      
+      // Bulk actions
+      $('#bulkReserve').click(function() {
+        $('#reserveModal').modal('show');
+      });
+      
+      $('#bulkRelease').click(function() {
+        const selectedCount = $('.bates-checkbox:checked').length;
+        if (selectedCount > 0) {
+          $('#releaseConfirmModal').modal('show');
+        } else {
+          showAlert('Please select at least one Bates number to release.', 'warning');
+        }
+      });
+      
+      $('#bulkExport').click(function() {
+        const selectedCount = $('.bates-checkbox:checked').length;
+        if (selectedCount > 0) {
+          $('#exportScope').val('selected');
+          $('#exportModal').modal('show');
+        } else {
+          showAlert('Please select at least one Bates number to export.', 'warning');
+        }
+      });
+      
+      // Confirm export
+      $('#confirmExport').click(function() {
+        const format = $('#exportFormat').val();
+        const scope = $('#exportScope').val();
+        
+        let message = '';
+        if (scope === 'all') {
+          message = `Exporting all Bates numbers as ${format.toUpperCase()}...`;
+        } else if (scope === 'filtered') {
+          const visibleRows = $('tbody tr:visible').length;
+          message = `Exporting ${visibleRows} filtered Bates numbers as ${format.toUpperCase()}...`;
+        } else if (scope === 'selected') {
+          const selectedCount = $('.bates-checkbox:checked').length;
+          message = `Exporting ${selectedCount} selected Bates numbers as ${format.toUpperCase()}...`;
+        }
+        
+        showAlert(message, 'info');
+        
+        // Close modal and show success message
+        $('#exportModal').modal('hide');
+        setTimeout(() => {
+          showAlert('Export completed successfully. Download starting...', 'success');
+        }, 1000);
+      });
+      
+      // Confirm reserve
+      $('#confirmReserve').click(function() {
+        const config = $('#reserveConfig option:selected').text();
+        const count = $('#reserveCount').val();
+        
+        // Reserve numbers
+        showAlert(`Reserving ${count} Bates numbers for "${config}"...`, 'info');
+        
+        // Close modal and show success message
+        $('#reserveModal').modal('hide');
+        setTimeout(() => {
+          showAlert(`${count} Bates numbers reserved successfully.`, 'success');
+        }, 1000);
+      });
+      
+      // Confirm release
+      $('#confirmRelease').click(function() {
+        const selectedCount = $('.bates-checkbox:checked').length;
+        
+        // Release numbers
+        showAlert(`Releasing ${selectedCount} Bates numbers...`, 'info');
+        
+        // Close modal and show success message
+        $('#releaseConfirmModal').modal('hide');
+        setTimeout(() => {
+          $('.bates-checkbox:checked').closest('tr').find('td:nth-child(6)').html('<span class="badge bg-secondary">Released</span>');
+          $('.bates-checkbox:checked').closest('tr').attr('data-status', 'released');
+          $('.bates-checkbox:checked').prop('checked', false);
+          $('#selectAllBates').prop('checked', false);
+          showAlert(`${selectedCount} Bates numbers released successfully.`, 'success');
+        }, 1000);
+      });
+    });
+    
+    function showAlert(message, type) {
+      const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      
+      $('#alertContainer').html(alertHtml);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        $('.alert').alert('close');
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

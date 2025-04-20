@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Drive Browser - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent.html">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories.html">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases.html">All Cases</a>
+            </li>
+            <li>
+              <a href="/cases/new.html">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry.html">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits.html">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages.html">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages.html">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring.html">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse show list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li class="active">
+              <a href="/drive/browser.html">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings.html">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          
+          <!-- Global Case Selector -->
+          <div class="case-selector-container ms-3">
+            <select id="globalCaseSelector" class="form-select form-select-sm">
+              <option value="all">All Cases</option>
+              <option value="1">Smith v. Johnson</option>
+              <option value="2">Williams v. City Hospital</option>
+              <option value="3">Brown v. Insurance Co.</option>
+            </select>
+          </div>
+
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout.html">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2 data-base-title="Google Drive Browser">Google Drive Browser</h2>
+            <p class="text-muted">Browse and manage files in your connected Google Drive account.</p>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <h5 class="card-title mb-0">Folders</h5>
+              </div>
+              <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                  <a href="#" class="list-group-item list-group-item-action active">
+                    <i class="bi bi-folder-fill me-2"></i> My Drive
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-folder me-2"></i> Case Files
+                    <ul class="list-unstyled ms-4 mt-2">
+                      <li><a href="#" class="text-decoration-none"><i class="bi bi-folder me-2"></i> Smith v. Johnson</a></li>
+                      <li><a href="#" class="text-decoration-none"><i class="bi bi-folder me-2"></i> Williams v. City Hospital</a></li>
+                      <li><a href="#" class="text-decoration-none"><i class="bi bi-folder me-2"></i> Brown v. Insurance Co.</a></li>
+                    </ul>
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-folder me-2"></i> Pleadings
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-folder me-2"></i> Discovery
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-folder me-2"></i> Exhibits
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-folder me-2"></i> Correspondence
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-folder me-2"></i> Research
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-folder me-2"></i> Templates
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header bg-light">
+                <h5 class="card-title mb-0">Storage</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Used Space</span>
+                    <span>7.5 GB / 15 GB</span>
+                  </div>
+                  <div class="progress" style="height: 10px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div><i class="bi bi-file-earmark-pdf text-danger"></i> PDF Files</div>
+                    <div>3.2 GB</div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div><i class="bi bi-file-earmark-word text-primary"></i> Word Documents</div>
+                    <div>1.8 GB</div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div><i class="bi bi-file-earmark-image text-success"></i> Images</div>
+                    <div>1.5 GB</div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div><i class="bi bi-file-earmark-text text-secondary"></i> Other Files</div>
+                    <div>1.0 GB</div>
+                  </div>
+                </div>
+                <div class="d-grid">
+                  <button type="button" class="btn btn-outline-primary btn-sm">
+                    <i class="bi bi-arrow-clockwise"></i> Refresh Storage Info
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                  <h5 class="card-title mb-0">My Drive</h5>
+                  <nav aria-label="breadcrumb" class="ms-3">
+                    <ol class="breadcrumb mb-0">
+                      <li class="breadcrumb-item"><a href="#">My Drive</a></li>
+                    </ol>
+                  </nav>
+                </div>
+                <div>
+                  <div class="btn-group me-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="refreshButton">
+                      <i class="bi bi-arrow-repeat"></i> Refresh
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-sort-down"></i> Sort
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item" href="#">Name (A-Z)</a></li>
+                      <li><a class="dropdown-item" href="#">Name (Z-A)</a></li>
+                      <li><a class="dropdown-item" href="#">Date Modified (Newest)</a></li>
+                      <li><a class="dropdown-item" href="#">Date Modified (Oldest)</a></li>
+                      <li><a class="dropdown-item" href="#">Size (Largest)</a></li>
+                      <li><a class="dropdown-item" href="#">Size (Smallest)</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-plus"></i> New
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-folder-plus me-2"></i> New Folder</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-cloud-upload me-2"></i> Upload Files</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-cloud-upload me-2"></i> Upload Folder</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Search files..." id="searchFiles">
+                      <button class="btn btn-outline-secondary" type="button" id="searchFilesButton">
+                        <i class="bi bi-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="d-flex justify-content-end">
+                      <select class="form-select form-select-sm" id="filterType">
+                        <option value="all">All File Types</option>
+                        <option value="folders">Folders</option>
+                        <option value="pdf">PDF Files</option>
+                        <option value="word">Word Documents</option>
+                        <option value="excel">Excel Spreadsheets</option>
+                        <option value="image">Images</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col" width="30">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="selectAllFiles">
+                          </div>
+                        </th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Owner</th>
+                        <th scope="col">Last Modified</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-folder-fill text-warning me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Case Files</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 15, 2025</td>
+                        <td>-</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-folder-fill text-warning me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Pleadings</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 15, 2025</td>
+                        <td>-</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-folder-fill text-warning me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Discovery</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 15, 2025</td>
+                        <td>-</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-folder-fill text-warning me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Exhibits</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 15, 2025</td>
+                        <td>-</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-file-earmark-pdf text-danger me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Case_Management_Plan.pdf</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 18, 2025</td>
+                        <td>1.2 MB</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-file-earmark-word text-primary me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Litigation_Strategy.docx</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 17, 2025</td>
+                        <td>845 KB</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-file-earmark-excel text-success me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Budget_Tracker.xlsx</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 16, 2025</td>
+                        <td>1.5 MB</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-file-earmark-pdf text-danger me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Client_Agreement.pdf</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 15, 2025</td>
+                        <td>2.1 MB</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-file-earmark-image text-info me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Evidence_Photo_1.jpg</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 14, 2025</td>
+                        <td>3.5 MB</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input file-select" type="checkbox">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <i class="bi bi-file-earmark-image text-info me-2 fs-5"></i>
+                            <a href="#" class="text-decoration-none">Evidence_Photo_2.jpg</a>
+                          </div>
+                        </td>
+                        <td>John Doe</td>
+                        <td>Apr 14, 2025</td>
+                        <td>2.8 MB</td>
+                        <td>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Download">
+                              <i class="bi bi-download"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Share">
+                              <i class="bi bi-share"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <div>
+                    <span class="text-muted">Showing 10 of 42 items</span>
+                  </div>
+                  <nav aria-label="File pagination">
+                    <ul class="pagination pagination-sm mb-0">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                      </li>
+                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">4</a></li>
+                      <li class="page-item"><a class="page-link" href="#">5</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+              <div class="card-footer bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <button type="button" class="btn btn-outline-primary btn-sm me-2" id="importButton">
+                      <i class="bi bi-cloud-download"></i> Import to System
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="downloadSelectedButton" disabled>
+                      <i class="bi bi-download"></i> Download Selected
+                    </button>
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-outline-danger btn-sm" id="deleteSelectedButton" disabled>
+                      <i class="bi bi-trash"></i> Delete Selected
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share File Modal -->
+  <div class="modal fade" id="shareFileModal" tabindex="-1" aria-labelledby="shareFileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="shareFileModalLabel">Share File</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="shareLink" class="form-label">Share Link</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="shareLink" value="https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view?usp=sharing" readonly>
+              <button class="btn btn-outline-secondary" type="button" id="copyLinkButton">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="sharePermission" class="form-label">Permission</label>
+            <select class="form-select" id="sharePermission">
+              <option value="view">Can view</option>
+              <option value="comment">Can comment</option>
+              <option value="edit">Can edit</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="shareEmail" class="form-label">Share with specific people</label>
+            <div class="input-group">
+              <input type="email" class="form-control" id="shareEmail" placeholder="Enter email address">
+              <button class="btn btn-outline-primary" type="button" id="addEmailButton">
+                <i class="bi bi-plus"></i> Add
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="list-group">
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-person-circle me-2"></i> john.doe@example.com
+                  <span class="badge bg-primary ms-2">Owner</span>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-sm btn-outline-secondary disabled">
+                    <i class="bi bi-x"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-person-circle me-2"></i> jane.smith@example.com
+                  <span class="badge bg-secondary ms-2">Can edit</span>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-x"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Initialize tooltips
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      });
+      
+      // Select all files
+      $('#selectAllFiles').change(function() {
+        $('.file-select').prop('checked', $(this).is(':checked'));
+        updateSelectedCount();
+      });
+      
+      // Individual file selection
+      $('.file-select').change(function() {
+        updateSelectedCount();
+        
+        // If any checkbox is unchecked, uncheck "select all" as well
+        if (!$(this).is(':checked')) {
+          $('#selectAllFiles').prop('checked', false);
+        }
+        
+        // If all checkboxes are checked, check "select all" as well
+        if ($('.file-select:checked').length === $('.file-select').length) {
+          $('#selectAllFiles').prop('checked', true);
+        }
+      });
+      
+      // Share button
+      $('button[title="Share"]').click(function() {
+        $('#shareFileModal').modal('show');
+      });
+      
+      // Copy link button
+      $('#copyLinkButton').click(function() {
+        const shareLink = document.getElementById('shareLink');
+        shareLink.select();
+        document.execCommand('copy');
+        showAlert('Link copied to clipboard.', 'success');
+      });
+      
+      // Add email button
+      $('#addEmailButton').click(function() {
+        const email = $('#shareEmail').val();
+        if (email) {
+          const newItem = `
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <i class="bi bi-person-circle me-2"></i> ${email}
+                <span class="badge bg-secondary ms-2">Can ${$('#sharePermission').val()}</span>
+              </div>
+              <div>
+                <button type="button" class="btn btn-sm btn-outline-secondary remove-email">
+                  <i class="bi bi-x"></i>
+                </button>
+              </div>
+            </div>
+          `;
+          $('.list-group').append(newItem);
+          $('#shareEmail').val('');
+          showAlert(`Added ${email} with "${$('#sharePermission').val()}" permission.`, 'success');
+        } else {
+          showAlert('Please enter an email address.', 'warning');
+        }
+      });
+      
+      // Remove email button
+      $(document).on('click', '.remove-email', function() {
+        $(this).closest('.list-group-item').remove();
+        showAlert('Email removed from sharing list.', 'success');
+      });
+      
+      // Refresh button
+      $('#refreshButton').click(function() {
+        showAlert('Refreshing file list...', 'info');
+        
+        // Simulate refresh
+        setTimeout(() => {
+          showAlert('File list refreshed successfully.', 'success');
+        }, 1000);
+      });
+      
+      // Import button
+      $('#importButton').click(function() {
+        showAlert('Importing selected files to document management system...', 'info');
+        
+        // Simulate import
+        setTimeout(() => {
+          showAlert('Files imported successfully.', 'success');
+        }, 1500);
+      });
+      
+      // Download selected button
+      $('#downloadSelectedButton').click(function() {
+        const selectedCount = $('.file-select:checked').length;
+        
+        if (selectedCount === 0) {
+          showAlert('Please select at least one file to download.', 'warning');
+          return;
+        }
+        
+        showAlert(`Downloading ${selectedCount} selected file(s)...`, 'info');
+        
+        // Simulate download
+        setTimeout(() => {
+          showAlert(`Successfully prepared ${selectedCount} file(s) for download.`, 'success');
+        }, 1500);
+      });
+      
+      // Delete selected button
+      $('#deleteSelectedButton').click(function() {
+        const selectedCount = $('.file-select:checked').length;
+        
+        if (selectedCount === 0) {
+          showAlert('Please select at least one file to delete.', 'warning');
+          return;
+        }
+        
+        if (confirm(`Are you sure you want to delete ${selectedCount} selected file(s)? This action cannot be undone.`)) {
+          showAlert(`Deleting ${selectedCount} selected file(s)...`, 'info');
+          
+          // Simulate delete
+          setTimeout(() => {
+            showAlert(`Successfully deleted ${selectedCount} file(s).`, 'success');
+            
+            // Remove deleted rows
+            $('.file-select:checked').each(function() {
+              $(this).closest('tr').remove();
+            });
+            
+            // Uncheck "select all"
+            $('#selectAllFiles').prop('checked', false);
+            
+            // Update selected count
+            updateSelectedCount();
+          }, 1500);
+        }
+      });
+      
+      // Search files
+      $('#searchFilesButton').click(function() {
+        const searchTerm = $('#searchFiles').val().toLowerCase();
+        if (searchTerm.length > 0) {
+          $('tbody tr').hide();
+          $('tbody tr').each(function() {
+            const text = $(this).text().toLowerCase();
+            if (text.indexOf(searchTerm) > -1) {
+              $(this).show();
+            }
+          });
+          
+          const visibleRows = $('tbody tr:visible').length;
+          showAlert(`Found ${visibleRows} file(s) matching "${searchTerm}".`, 'info');
+        } else {
+          $('tbody tr').show();
+          applyFilters();
+        }
+      });
+      
+      // Enter key in search box
+      $('#searchFiles').keypress(function(e) {
+        if (e.which === 13) {
+          $('#searchFilesButton').click();
+          return false;
+        }
+      });
+      
+      // Filter by file type
+      $('#filterType').change(function() {
+        applyFilters();
+      });
+      
+      // Global case selector
+      $('#globalCaseSelector').change(function() {
+        const selectedCase = $(this).val();
+        const caseName = $('#globalCaseSelector option:selected').text();
+        
+        showAlert(`Switched to ${caseName} context.`, 'info');
+      });
+      
+      // Function to apply filters
+      function applyFilters() {
+        const typeFilter = $('#filterType').val();
+        
+        if (typeFilter === 'all') {
+          $('tbody tr').show();
+        } else {
+          $('tbody tr').hide();
+          
+          if (typeFilter === 'folders') {
+            $('tbody tr td:nth-child(2) i.bi-folder-fill').closest('tr').show();
+          } else if (typeFilter === 'pdf') {
+            $('tbody tr td:nth-child(2) i.bi-file-earmark-pdf').closest('tr').show();
+          } else if (typeFilter === 'word') {
+            $('tbody tr td:nth-child(2) i.bi-file-earmark-word').closest('tr').show();
+          } else if (typeFilter === 'excel') {
+            $('tbody tr td:nth-child(2) i.bi-file-earmark-excel').closest('tr').show();
+          } else if (typeFilter === 'image') {
+            $('tbody tr td:nth-child(2) i.bi-file-earmark-image').closest('tr').show();
+          }
+        }
+        
+        updateSelectedCount();
+      }
+      
+      // Function to update selected count
+      function updateSelectedCount() {
+        const selectedCount = $('.file-select:checked').length;
+        const totalVisible = $('.file-select:visible').length;
+        
+        if (selectedCount > 0) {
+          $('#downloadSelectedButton').text(`Download Selected (${selectedCount})`);
+          $('#downloadSelectedButton').prop('disabled', false);
+          $('#deleteSelectedButton').text(`Delete Selected (${selectedCount})`);
+          $('#deleteSelectedButton').prop('disabled', false);
+        } else {
+          $('#downloadSelectedButton').text('Download Selected');
+          $('#downloadSelectedButton').prop('disabled', true);
+          $('#deleteSelectedButton').text('Delete Selected');
+          $('#deleteSelectedButton').prop('disabled', true);
+        }
+        
+        // Update "select all" checkbox
+        if (selectedCount === totalVisible && totalVisible > 0) {
+          $('#selectAllFiles').prop('checked', true);
+        } else {
+          $('#selectAllFiles').prop('checked', false);
+        }
+      }
+    });
+    
+    function showAlert(message, type) {
+      const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      
+      $('#alertContainer').html(alertHtml);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        $('.alert').alert('close');
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
