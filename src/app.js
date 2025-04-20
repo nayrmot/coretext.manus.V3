@@ -33,6 +33,90 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
+// Add this right after your middleware setup but before your route definitions
+// Simple standalone test endpoint for MongoDB connection
+app.get('/api/test-connection', async (req, res) => {
+  try {
+    // Get connection information
+    const dbConnection = mongoose.connection;
+    
+    // Check if connected
+    if (dbConnection.readyState !== 1) {
+      return res.status(500).json({
+        success: false,
+        message: 'Not connected to MongoDB'
+      });
+    }
+    
+    // Get database information
+    const dbName = dbConnection.db.databaseName;
+    const serverInfo = await dbConnection.db.admin().serverInfo();
+    
+    res.status(200).json({
+      success: true,
+      database: dbName,
+      server: serverInfo.host,
+      version: serverInfo.version
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: `Error testing connection: ${error.message}`
+    });
+  }
+});
+
+// Direct test endpoint for MongoDB cases
+app.get('/api/direct-cases-test', async (req, res) => {
+  try {
+    // Get connection information
+    const dbConnection = mongoose.connection;
+    
+    // Check if connected
+    if (dbConnection.readyState !== 1) {
+      return res.status(500).json({
+        success: false,
+        message: 'Not connected to MongoDB'
+      });
+    }
+    
+    // Get the Case model
+    const Case = require('./models/case.model');
+    
+    // Directly query the database
+    const cases = await Case.find().sort({ createdAt: -1 });
+    
+    res.status(200).json({
+      success: true,
+      count: cases.length,
+      cases: cases
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: `Error fetching cases: ${error.message}`
+    });
+  }
+});
+
+app.get('/api/public-cases', async (req, res) => {
+  try {
+    const Case = require('./models/case.model');
+    const cases = await Case.find().sort({ createdAt: -1 });
+    
+    res.status(200).json({
+      success: true,
+      count: cases.length,
+      data: cases
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: `Error fetching cases: ${error.message}`
+    });
+  }
+});
+
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/documents', verifyToken, documentRoutes);

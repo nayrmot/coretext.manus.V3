@@ -15,3 +15,5 @@ env/
 
 # local MongoDB data
 data/db/
+
+*.env

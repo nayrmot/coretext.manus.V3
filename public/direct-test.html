@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direct MongoDB Test</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Direct MongoDB Test</h1>
+    <p>This page tests direct access to MongoDB data without using the API.</p>
+    
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5>Database Connection Test</h5>
+      </div>
+      <div class="card-body">
+        <div id="connectionResult">
+          <div class="alert alert-info">Testing connection to MongoDB...</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5>Cases in Database</h5>
+      </div>
+      <div class="card-body">
+        <div id="casesResult">
+          <div class="alert alert-info">Loading cases directly from MongoDB...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // When the page loads, make a request to our direct test endpoint
+    document.addEventListener('DOMContentLoaded', function() {
+      // Test connection
+      fetch('/api/test-connection')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.success) {
+            document.getElementById('connectionResult').innerHTML = `
+              <div class="alert alert-success">
+                <strong>Connection successful!</strong><br>
+                Connected to: ${data.database}<br>
+                Server: ${data.server || 'undefined'}<br>
+                Version: ${data.version}
+              </div>
+            `;
+          } else {
+            document.getElementById('connectionResult').innerHTML = `
+              <div class="alert alert-warning">
+                <strong>Connection established but with issues:</strong><br>
+                ${data.message}
+              </div>
+            `;
+          }
+        })
+        .catch(error => {
+          document.getElementById('connectionResult').innerHTML = `
+            <div class="alert alert-danger">
+              <strong>Connection failed!</strong><br>
+              Error: ${error.message}
+            </div>
+          `;
+        });
+      
+      // Test direct case access
+      fetch('/api/direct-cases-test')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.success && data.cases && data.cases.length > 0) {
+            let casesHtml = '<div class="alert alert-success"><strong>Successfully loaded cases!</strong></div>';
+            casesHtml += '<table class="table table-striped">';
+            casesHtml += '<thead><tr><th>Case Name</th><th>Case Number</th><th>Status</th><th>Created</th></tr></thead>';
+            casesHtml += '<tbody>';
+            
+            data.cases.forEach(caseItem => {
+              casesHtml += `<tr>
+                <td>${caseItem.name}</td>
+                <td>${caseItem.caseNumber}</td>
+                <td>${caseItem.status}</td>
+                <td>${new Date(caseItem.createdAt).toLocaleDateString()}</td>
+              </tr>`;
+            });
+            
+            casesHtml += '</tbody></table>';
+            document.getElementById('casesResult').innerHTML = casesHtml;
+          } else {
+            document.getElementById('casesResult').innerHTML = `
+              <div class="alert alert-warning">
+                <strong>No cases found in database.</strong><br>
+                ${data.message || 'The database appears to be empty.'}
+              </div>
+            `;
+          }
+        })
+        .catch(error => {
+          document.getElementById('casesResult').innerHTML = `
+            <div class="alert alert-danger">
+              <strong>Failed to load cases!</strong><br>
+              Error: ${error.message}
+            </div>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>
