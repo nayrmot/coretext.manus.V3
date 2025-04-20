@@ -22,7 +22,7 @@ const CaseSchema = new mongoose.Schema({
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false // Changed from required: true to make this field optional
   },
   driveFolderId: {
     type: String

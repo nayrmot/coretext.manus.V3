@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Case - Document Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <!-- Add case-form.js script -->
+  <script src="/js/case-form.js" defer></script>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h3>Document Management</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li>
+          <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <ul class="collapse list-unstyled" id="dashboard">
+            <li>
+              <a href="/index.html">Overview</a>
+            </li>
+            <li>
+              <a href="/dashboard/recent.html">Recent Activity</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#documentsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-file-earmark-text"></i> Documents
+          </a>
+          <ul class="collapse list-unstyled" id="documentsSubmenu">
+            <li>
+              <a href="/documents.html">All Documents</a>
+            </li>
+            <li>
+              <a href="/documents/upload.html">Upload</a>
+            </li>
+            <li>
+              <a href="/documents/categories.html">Categories</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#casesSubmenu" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <i class="bi bi-briefcase"></i> Cases
+          </a>
+          <ul class="collapse show list-unstyled" id="casesSubmenu">
+            <li>
+              <a href="/cases.html">All Cases</a>
+            </li>
+            <li class="active">
+              <a href="/cases/new.html">New Case</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#batesSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-upc-scan"></i> Bates Labeling
+          </a>
+          <ul class="collapse list-unstyled" id="batesSubmenu">
+            <li>
+              <a href="/bates/configurations.html">Configurations</a>
+            </li>
+            <li>
+              <a href="/bates/apply.html">Apply Labels</a>
+            </li>
+            <li>
+              <a href="/bates/registry.html">Registry</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#exhibitsSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-card-list"></i> Exhibits
+          </a>
+          <ul class="collapse list-unstyled" id="exhibitsSubmenu">
+            <li>
+              <a href="/exhibits.html">All Exhibits</a>
+            </li>
+            <li>
+              <a href="/exhibits/create.html">Create Exhibit</a>
+            </li>
+            <li>
+              <a href="/exhibits/packages.html">Packages</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#emailSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-envelope"></i> Email Integration
+          </a>
+          <ul class="collapse list-unstyled" id="emailSubmenu">
+            <li>
+              <a href="/email/connect.html">Connect Gmail</a>
+            </li>
+            <li>
+              <a href="/email/messages.html">Messages</a>
+            </li>
+            <li>
+              <a href="/email/monitoring.html">Monitoring</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#driveSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="bi bi-cloud"></i> Google Drive
+          </a>
+          <ul class="collapse list-unstyled" id="driveSubmenu">
+            <li>
+              <a href="/drive/sync.html">Synchronization</a>
+            </li>
+            <li>
+              <a href="/drive/browser.html">File Browser</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/settings.html">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content" class="content">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="bi bi-list"></i>
+            <span>Toggle Sidebar</span>
+          </button>
+          
+          <!-- Global Case Selector -->
+          <div class="case-selector-container ms-3">
+            <select id="globalCaseSelector" class="form-select form-select-sm">
+              <option value="all">All Cases</option>
+              <!-- Cases will be loaded dynamically from the database -->
+            </select>
+          </div>
+
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bell"></i> <span class="badge bg-danger">3</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> John Doe
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile.html">Profile</a></li>
+                  <li><a class="dropdown-item" href="/settings.html">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout.html">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid" id="main-content">
+        <!-- Alert container -->
+        <div id="alertContainer"></div>
+        
+        <!-- Content -->
+        <div class="row">
+          <div class="col-12 mb-4">
+            <h2>New Case</h2>
+            <p class="text-muted">Create a new legal case in the system.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <form id="newCaseForm" novalidate>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="caseName" class="form-label">Case Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="caseName" name="name" required>
+                  <div class="invalid-feedback">
+                    Please enter a case name.
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="caseNumber" class="form-label">Case Number <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="caseNumber" name="caseNumber" required>
+                  <div class="invalid-feedback">
+                    Please enter a case number.
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="caseType" class="form-label">Case Type <span class="text-danger">*</span></label>
+                  <select class="form-select" id="caseType" name="type" required>
+                    <option value="" selected disabled>Select a type...</option>
+                    <option value="personal_injury">Personal Injury</option>
+                    <option value="medical_malpractice">Medical Malpractice</option>
+                    <option value="contract">Contract</option>
+                    <option value="employment">Employment</option>
+                    <option value="family">Family Law</option>
+                    <option value="criminal">Criminal Defense</option>
+                    <option value="immigration">Immigration</option>
+                    <option value="intellectual_property">Intellectual Property</option>
+                    <option value="real_estate">Real Estate</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a case type.
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="caseStatus" class="form-label">Status <span class="text-danger">*</span></label>
+                  <select class="form-select" id="caseStatus" name="status" required>
+                    <option value="" selected disabled>Select a status...</option>
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="closed">Closed</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a status.
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="clientName" class="form-label">Client Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="clientName" name="client" required>
+                  <div class="invalid-feedback">
+                    Please enter a client name.
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="courtName" class="form-label">Court</label>
+                  <input type="text" class="form-control" id="courtName" name="court">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="filingDate" class="form-label">Filing Date</label>
+                  <input type="date" class="form-control" id="filingDate" name="filingDate">
+                </div>
+                <div class="col-md-6">
+                  <label for="hearingDate" class="form-label">Next Hearing Date</label>
+                  <input type="date" class="form-control" id="hearingDate" name="hearingDate">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="caseDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="caseDescription" name="description" rows="4"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="caseNotes" class="form-label">Notes</label>
+                <textarea class="form-control" id="caseNotes" name="notes" rows="3"></textarea>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="assignedAttorney" class="form-label">Assigned Attorney</label>
+                  <input type="text" class="form-control" id="assignedAttorney" name="assignedAttorney">
+                </div>
+                <div class="col-md-6">
+                  <label for="opposingCounsel" class="form-label">Opposing Counsel</label>
+                  <input type="text" class="form-control" id="opposingCounsel" name="opposingCounsel">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <hr>
+                  <div class="d-flex justify-content-between">
+                    <a href="/cases.html" class="btn btn-outline-secondary">Cancel</a>
+                    <div>
+                      <button type="reset" class="btn btn-outline-secondary me-2">Reset</button>
+                      <button type="submit" class="btn btn-primary">Create Case</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle sidebar
+      document.getElementById('sidebarCollapse').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('content').classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

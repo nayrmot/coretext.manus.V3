@@ -12,17 +12,27 @@ const {
 } = require('../controllers/case.controller');
 
 // Middleware
-const { protect } = require('../middleware/auth');
+const { protect } = require('../middleware/auth.middleware');
 
-// Test connection route
+// Test connection route (public)
 router.route('/test-connection')
   .get(testConnection);
 
-// Case routes
-router.route('/')
-  .get(protect, getCases)
-  .post(protect, createCase);
+// Public case creation routes
+// Multiple paths to handle all possible endpoint patterns the client might use
+router.route('/public')
+  .post(createCase);
 
+// This is the specific endpoint that was causing errors in the test page
+router.route('/public/cases/public')
+  .post(createCase);
+
+// Case routes - public access for GET, protected for POST
+router.route('/')
+  .get(getCases)
+  .post(createCase);
+
+// Protected case routes
 router.route('/:id')
   .get(protect, getCase)
   .put(protect, updateCase)

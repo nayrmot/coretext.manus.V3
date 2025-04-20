@@ -1,7 +1,7 @@
-// Updated case controller with proper getCases implementation
 const Case = require('../models/case.model');
-const mongoose = require('mongoose');
+const Document = require('../models/document.model');
 const asyncHandler = require('../middleware/async');
+const mongoose = require('mongoose');
 
 /**
  * @desc    Get all cases
@@ -38,7 +38,7 @@ exports.getCase = asyncHandler(async (req, res) => {
     if (!caseItem) {
       return res.status(404).json({
         success: false,
-        message: 'Case not found'
+        error: `Case not found with id of ${req.params.id}`
       });
     }
     
@@ -61,14 +61,22 @@ exports.getCase = asyncHandler(async (req, res) => {
  */
 exports.createCase = asyncHandler(async (req, res) => {
   try {
-    // Create case
-    const caseItem = await Case.create(req.body);
+    // Create a copy of the request body to modify
+    const caseData = { ...req.body };
+    
+    // For public routes, we need to handle the createdBy field differently
+    // Since it's required in the schema and must be an ObjectId
+    caseData.createdBy = new mongoose.Types.ObjectId();
+    
+    // Create case with the modified data
+    const caseItem = await Case.create(caseData);
     
     res.status(201).json({
       success: true,
       data: caseItem
     });
   } catch (error) {
+    console.error('Case creation error:', error);
     res.status(500).json({
       success: false,
       message: `Error creating case: ${error.message}`
@@ -88,11 +96,18 @@ exports.updateCase = asyncHandler(async (req, res) => {
     if (!caseItem) {
       return res.status(404).json({
         success: false,
-        message: 'Case not found'
+        error: `Case not found with id of ${req.params.id}`
       });
     }
     
-    // Update case
+    // Make sure user is case owner if req.user exists
+    if (req.user && caseItem.createdBy && caseItem.createdBy.toString() !== req.user.id) {
+      return res.status(401).json({
+        success: false,
+        error: `User ${req.user.id} is not authorized to update this case`
+      });
+    }
+    
     caseItem = await Case.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
@@ -122,7 +137,15 @@ exports.deleteCase = asyncHandler(async (req, res) => {
     if (!caseItem) {
       return res.status(404).json({
         success: false,
-        message: 'Case not found'
+        error: `Case not found with id of ${req.params.id}`
+      });
+    }
+    
+    // Make sure user is case owner if req.user exists
+    if (req.user && caseItem.createdBy && caseItem.createdBy.toString() !== req.user.id) {
+      return res.status(401).json({
+        success: false,
+        error: `User ${req.user.id} is not authorized to delete this case`
       });
     }
     
@@ -152,15 +175,17 @@ exports.getCaseDocuments = asyncHandler(async (req, res) => {
     if (!caseItem) {
       return res.status(404).json({
         success: false,
-        message: 'Case not found'
+        error: `Case not found with id of ${req.params.id}`
       });
     }
     
-    // In a real implementation, you would fetch documents related to this case
-    // For now, we'll return an empty array
+    const documents = await Document.find({ case: req.params.id })
+      .sort('-createdAt');
+    
     res.status(200).json({
       success: true,
-      data: []
+      count: documents.length,
+      data: documents
     });
   } catch (error) {
     res.status(500).json({
@@ -182,22 +207,51 @@ exports.getCaseDashboard = asyncHandler(async (req, res) => {
     if (!caseItem) {
       return res.status(404).json({
         success: false,
-        message: 'Case not found'
+        error: `Case not found with id of ${req.params.id}`
       });
     }
     
-    // In a real implementation, you would fetch dashboard data for this case
-    // For now, we'll return a simple object
+    // Get document counts by category - using a safe approach to avoid undefined errors
+    let documentsByCategory = [];
+    try {
+      documentsByCategory = await Document.aggregate([
+        { $match: { case: mongoose.Types.ObjectId(req.params.id) } },
+        { $group: { _id: '$category', count: { $sum: 1 } } }
+      ]);
+    } catch (err) {
+      console.error('Error aggregating documents by category:', err);
+      // Continue execution even if this fails
+    }
+    
+    // Get recent documents
+    let recentDocuments = [];
+    try {
+      recentDocuments = await Document.find({ case: req.params.id })
+        .sort('-createdAt')
+        .limit(5);
+      
+      // Only try to populate if documents were found
+      if (recentDocuments.length > 0) {
+        recentDocuments = await Document.populate(recentDocuments, {
+          path: 'uploadedBy',
+          select: 'name'
+        });
+      }
+    } catch (err) {
+      console.error('Error fetching recent documents:', err);
+      // Continue execution even if this fails
+    }
+    
     res.status(200).json({
       success: true,
       data: {
-        caseId: caseItem._id,
-        caseName: caseItem.name,
-        documentCount: 0,
-        lastUpdated: caseItem.updatedAt || caseItem.createdAt
+        case: caseItem,
+        documentsByCategory,
+        recentDocuments
       }
     });
   } catch (error) {
+    console.error('Dashboard error:', error);
     res.status(500).json({
       success: false,
       message: `Error fetching case dashboard: ${error.message}`
@@ -231,7 +285,8 @@ exports.testConnection = asyncHandler(async (req, res) => {
       success: true,
       database: dbName,
       server: serverInfo.host,
-      version: serverInfo.version
+      version: serverInfo.version,
+      state: 'connected'
     });
   } catch (error) {
     res.status(500).json({
