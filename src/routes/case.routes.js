@@ -7,11 +7,16 @@ const {
   updateCase, 
   deleteCase, 
   getCaseDocuments,
-  getCaseDashboard
+  getCaseDashboard,
+  testConnection
 } = require('../controllers/case.controller');
 
 // Middleware
 const { protect } = require('../middleware/auth');
+
+// Test connection route
+router.route('/test-connection')
+  .get(testConnection);
 
 // Case routes
 router.route('/')
